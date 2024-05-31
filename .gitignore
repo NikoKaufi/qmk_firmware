@@ -115,5 +115,10 @@ compile_commands.json
 .cache/
 
 # VIA(L) files that don't belong in QMK repo
-via*.json
+# via*.json
 /keyboards/**/keymaps/vial/*
+
+
+# my test keyboard
+
+/nikokaufi/*vorlage*
