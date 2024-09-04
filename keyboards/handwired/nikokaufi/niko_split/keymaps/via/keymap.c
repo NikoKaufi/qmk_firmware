@@ -6,6 +6,7 @@
 /* MACROS */
 enum custom_keycodes {
     OFF = SAFE_RANGE,
+    STP = SAFE_RANGE,
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -13,10 +14,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING(SS_LGUI("r"));
             SEND_STRING(SS_DELAY(300));
-            SEND_STRING("shutdown /s /t 0");
+            SEND_STRING("shutdown /s /t 7 /f");
             SEND_STRING(SS_DELAY(300));
             SEND_STRING(SS_TAP(X_ENTER));
-            SEND_STRING(SS_DELAY(5000));
+        }
+        else { //when keycode is released
+        }
+        break;
+    case STP:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI("r"));
+            SEND_STRING(SS_DELAY(300));
+            SEND_STRING("shutdown /a");
+            SEND_STRING(SS_DELAY(300));
             SEND_STRING(SS_TAP(X_ENTER));
         }
         else { //when keycode is released
@@ -109,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     /*  [2]
      * ┌───┬───┬───┬───┬───┬───┐                     ┌───┬───┬───┬───┬───┬───┐
-     * │OFF│   │   │   │   │   ├───┐             ┌───┤   |   |   |   |   |ß?\|
+     * │OFF│STP│   │   │   │   ├───┐             ┌───┤   |   |   |   |   |ß?\|
      * ├───┼───┼───┼───┼───┼───┤   │             |   ├───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │   │   ├───┤             ├───┤   |   |   |   |   |+*~|
      * ├───┼───┼───┼───┼───┼───┤   │             |   ├───┼───┼───┼───┼───┼───┤
@@ -121,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                └───┴─────┴───┴───┘   └───┴───┴─────┴───┘
      */
     [2] = LAYOUT_custom(
-        OFF,     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        OFF,     STP,     KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
