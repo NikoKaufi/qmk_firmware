@@ -6,7 +6,7 @@
 /* MACROS */
 enum custom_keycodes {
     OFF = SAFE_RANGE,
-    STP = SAFE_RANGE,
+    STP,
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -97,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤INS│             |PUP├───┼───┼───┼───┼───┼───┤
      * │   │F11│F12│MS↑│   │   ├───┤             ├───┤   |   | ↑ |   |   |+*~|
      * ├───┼───┼───┼───┼───┼───┤F14│             |PDN├───┼───┼───┼───┼───┼───┤
-     * │CAP│   │MS←│MS↓│MS→│   ├───┤             ├───┤   | ← | ↓ | → |   |#' |
+     * │SHI│   │MS←│MS↓│MS→│   ├───┤             ├───┤   | ← | ↓ | → |   |#' |
      * ├───┼───┼───┼───┼───┼───┤MS1│             |MS2├───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   |MS1├───┘             └───┤NKR|   |   |   |   |   |
+     * │CAP│   │   │   │   |MS1├───┘             └───┤NKR|   |   |   |   |   |
      * └───┴───┴───┴──┬┴──┬┴───┴┬───┬───┐   ┌───┬───┬┴───┴┬──┴┬──┴───┴───┴───┘
      *                |CTL| /1\ |ALT|WIN|   |ALT|BSP| WIN |CTL|
      *                └───┴─────┴───┴───┘   └───┴───┴─────┴───┘
@@ -107,8 +107,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [1] = LAYOUT_custom(
         KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,
         KC_NO,   KC_F11,  KC_F12,  KC_MS_U, KC_NO,   KC_NO,   KC_INS,
-        KC_CAPS, KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_F14,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
+        KC_LSFT, KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,   KC_F14,
+        KC_CAPS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
                                             KC_LCTL, _______, KC_LALT, KC_LGUI,
         //right
                           KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_EQL,
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤   │             |   ├───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │   |   ├───┘             └───┤   |   |,; |.: |-_ |   |
      * └───┴───┴───┴──┬┴──┬┴───┴┬───┬───┐   ┌───┬───┬┴───┴┬──┴┬──┴───┴───┴───┘
-     *                |   |     |/2\|   |   |ALT|BSP| SHI |   |
+     *                |   |     |/2\|   |   |ALT|BSP| SHI |CTL|
      *                └───┴─────┴───┴───┘   └───┴───┴─────┴───┘
      */
     [2] = LAYOUT_custom(
@@ -141,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_RBRC,
                  KC_NO,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS,
                  KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
-        KC_RALT, KC_BSPC, KC_RSFT, KC_NO
+        KC_RALT, KC_BSPC, KC_RSFT, KC_RCTL
         ),
     /*  [3]
      * ┌───┬───┬───┬───┬───┬───┐                     ┌───┬───┬───┬───┬───┬───┐
