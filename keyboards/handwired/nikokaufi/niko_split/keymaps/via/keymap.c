@@ -14,7 +14,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
             SEND_STRING(SS_LGUI("r"));
             SEND_STRING(SS_DELAY(300));
-            SEND_STRING("shutdown /s /t 7 /f");
+            SEND_STRING("shutdown /s /t 10 /f /c @Herunterfahren in 10 Sekunden@");
             SEND_STRING(SS_DELAY(300));
             SEND_STRING(SS_TAP(X_ENTER));
         }
