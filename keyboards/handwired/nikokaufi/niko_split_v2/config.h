@@ -33,10 +33,6 @@
     #define ENCODER_DEFAULT_POS_RIGHT 0x3
 #endif
 
-/* JUST IF other pins are used on the right side: */
-    #define MATRIX_COL_PINS_RIGHT { GP8, GP7, GP6, GP5, GP4, GP3, GP2 }
-    #define MATRIX_ROW_PINS_RIGHT { GP13, GP12, GP11, GP10, GP9 }
-
 /* serial communication between halfs */
 #define SERIAL_USART_FULL_DUPLEX    // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN GP16     // USART TX pin      //5v=, gnd=, GP1=, GP0=
@@ -50,10 +46,6 @@
 
 #define SPLIT_WATCHDOG_ENABLE       //reboot the keyboard if no successful communication occurs within:
 #define SPLIT_WATCHDOG_TIMEOUT 2500
-
-/* bootmagic for right half */
-#define BOOTMAGIC_ROW_RIGHT 4
-#define BOOTMAGIC_COLUMN_RIGHT 6
 
 /* Tap-Dance */
 #define TAPPING_TERM 175
