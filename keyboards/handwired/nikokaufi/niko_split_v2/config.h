@@ -51,8 +51,8 @@
 #define TAPPING_TERM 175
 
 /* rgb general */
-#define WS2812_DI_PIN GP16       //PIN for RGB
-#define RGBLIGHT_LED_COUNT 42    //LED_COUNT total
+#define WS2812_DI_PIN GP1       //PIN for RGB
+#define RGBLIGHT_LED_COUNT 56    //LED_COUNT total
 #define WS2812_BYTE_ORDER WS2812_BYTE_ORDER_RGB     //changing byte order
 #define RGBLIGHT_SLEEP           //turn off LED, when host is in sleep
     // #define RGBLIGHT_HUE_STEP 8  //8=default
@@ -64,5 +64,5 @@
     // #define RGBLIGHT_DEFAULT_SAT 0   //saturation after flashing, UINT8_MAX (255)=default
 
 /* rgb split */
-#define RGBLED_SPLIT { 21, 21 }   //the number of LEDs connected on each half
+#define RGBLED_SPLIT { 28, 28 }   //the number of LEDs connected on each half
 #define RGBLIGHT_SPLIT          //sync RGB between halfs
