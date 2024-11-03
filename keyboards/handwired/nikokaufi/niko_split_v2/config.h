@@ -22,14 +22,14 @@
 /* Encoder Configuration */
 #ifdef ENCODER_ENABLE
     //left
-    #define ENCODERS_PAD_A { GP_Al }
-    #define ENCODERS_PAD_B { GP_Bl }
-    #define ENCODER_RESOLUTION 4
+    // #define ENCODERS_PAD_A { GP_Al }
+    // #define ENCODERS_PAD_B { GP_Bl }
+    // #define ENCODER_RESOLUTION 4
     #define ENCODER_DEFAULT_POS 0x3
     // JUST if other pins are used on the right side:
-    #define ENCODERS_PAD_A_RIGHT { GP_Ar }
-    #define ENCODERS_PAD_B_RIGHT { GP_Br }
-    #define ENCODER_RESOLUTIONS_RIGHT 4
+    // #define ENCODERS_PAD_A_RIGHT { GP_Ar }
+    // #define ENCODERS_PAD_B_RIGHT { GP_Br }
+    // #define ENCODER_RESOLUTIONS_RIGHT 4
     #define ENCODER_DEFAULT_POS_RIGHT 0x3
 #endif
 
