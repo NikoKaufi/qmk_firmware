@@ -22,14 +22,14 @@
 /* Encoder Configuration */
 #ifdef ENCODER_ENABLE
     //left
-    // #define ENCODERS_PAD_A { GP_Al }
-    // #define ENCODERS_PAD_B { GP_Bl }
-    // #define ENCODER_RESOLUTION 4
+    #define ENCODERS_PAD_A { GP23 }
+    #define ENCODERS_PAD_B { GP21 }
+    #define ENCODER_RESOLUTION 4
     #define ENCODER_DEFAULT_POS 0x3
     // JUST if other pins are used on the right side:
-    // #define ENCODERS_PAD_A_RIGHT { GP_Ar }
-    // #define ENCODERS_PAD_B_RIGHT { GP_Br }
-    // #define ENCODER_RESOLUTIONS_RIGHT 4
+    #define ENCODERS_PAD_A_RIGHT { GP9 }
+    #define ENCODERS_PAD_B_RIGHT { GP7 }
+    #define ENCODER_RESOLUTIONS_RIGHT 4
     #define ENCODER_DEFAULT_POS_RIGHT 0x3
 #endif
 
@@ -50,19 +50,19 @@
 /* Tap-Dance */
 #define TAPPING_TERM 175
 
-/* rgb general */
-#define WS2812_DI_PIN GP1       //PIN for RGB
-#define RGBLIGHT_LED_COUNT 56    //LED_COUNT total
-#define WS2812_BYTE_ORDER WS2812_BYTE_ORDER_RGB     //changing byte order
-#define RGBLIGHT_SLEEP           //turn off LED, when host is in sleep
-    // #define RGBLIGHT_HUE_STEP 8  //8=default
-    // #define RGBLIGHT_SAT_STEP 17 //17=default?
-    // #define RGBLIGHT_VAL_STEP 17 //17=default?
-    // #define RGBLIGHT_LIMIT_VAL 255   //max brightness, 255=default
-#define RGBLIGHT_DEFAULT_HUE 169 //color after flashing (0=red, 85=green, 169=blue) (https://github.com/qmk/qmk_firmware/blob/master/docs/feature_rgblight.md)
-    // #define RGBLIGHT_DEFAULT_VAL 255 //brighness after flashing
-    // #define RGBLIGHT_DEFAULT_SAT 0   //saturation after flashing, UINT8_MAX (255)=default
+// /* rgb general */
+// #define WS2812_DI_PIN GP1       //PIN for RGB
+// #define RGBLIGHT_LED_COUNT 56    //LED_COUNT total
+// #define WS2812_BYTE_ORDER WS2812_BYTE_ORDER_RGB     //changing byte order
+// #define RGBLIGHT_SLEEP           //turn off LED, when host is in sleep
+//     // #define RGBLIGHT_HUE_STEP 8  //8=default
+//     // #define RGBLIGHT_SAT_STEP 17 //17=default?
+//     // #define RGBLIGHT_VAL_STEP 17 //17=default?
+//     // #define RGBLIGHT_LIMIT_VAL 255   //max brightness, 255=default
+// #define RGBLIGHT_DEFAULT_HUE 169 //color after flashing (0=red, 85=green, 169=blue) (https://github.com/qmk/qmk_firmware/blob/master/docs/feature_rgblight.md)
+//     // #define RGBLIGHT_DEFAULT_VAL 255 //brighness after flashing
+//     // #define RGBLIGHT_DEFAULT_SAT 0   //saturation after flashing, UINT8_MAX (255)=default
 
-/* rgb split */
-#define RGBLED_SPLIT { 28, 28 }   //the number of LEDs connected on each half
-#define RGBLIGHT_SPLIT          //sync RGB between halfs
+// /* rgb split */
+// #define RGBLED_SPLIT { 28, 28 }   //the number of LEDs connected on each half
+// #define RGBLIGHT_SPLIT          //sync RGB between halfs

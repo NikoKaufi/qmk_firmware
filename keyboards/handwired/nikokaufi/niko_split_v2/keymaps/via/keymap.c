@@ -40,7 +40,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 /* TAP DANCE */
 enum {
     TD_ESC_AF4,
-    TD_SS
+    TD_S_SS
 };
 void escaltf4(tap_dance_state_t *state, void *user_data) {
     if (state->count >= 3) {
@@ -53,7 +53,7 @@ void escaltf4(tap_dance_state_t *state, void *user_data) {
         tap_code(KC_ESC);
     }
 }
-void sß(tap_dance_state_t *state, void *user_data) {
+void sss(tap_dance_state_t *state, void *user_data) {
     if (state->count >= 3) {
         tap_code(DE_SS);
     }
@@ -63,7 +63,7 @@ void sß(tap_dance_state_t *state, void *user_data) {
 }
 tap_dance_action_t tap_dance_actions[] = {
     [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4),
-    [TD_S_ß] = ACTION_TAP_DANCE_FN(sß),
+    [TD_S_SS] = ACTION_TAP_DANCE_FN(sss),
 };
 
 /* CUSTOM KEYCODES */
@@ -71,10 +71,10 @@ tap_dance_action_t tap_dance_actions[] = {
 #define ALT2 LT(2,KC_LALT)
 #define ENT_CTL RCTL_T(KC_ENT)
 #define ESC_AF4 TD(TD_ESC_AF4)
-#define S_ß TD(TD_S_ß)
+#define S_SS TD(TD_S_SS)
 // home row mods
 #define A_SHI (LSFT_T(KC_A))
-#define S_ALT (LALT_T(S_ß))
+#define S_ALT (LALT_T(TD_S_SS))
 #define D_STRG (LCTL_T(KC_D))
 #define F_WIN (LWIN_T(KC_F))
 #define J_WIN (RWIN_T(KC_J))
@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 | ? |SPC|ALT|    |AGR|<- |ENT|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [0] = LAYOUT_custom(
+    [0] = LAYOUT_split_3x6_3(
         ESC_AF4, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,
         KC_TAB,  A_SHI,   S_ALT,   D_STRG,  F_WIN,   KC_G,
         DE_LABK, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |   |   |   |    |   |   |   |
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [1] = LAYOUT_custom(
+    [1] = LAYOUT_split_3x6_3(
         KC_NO,   KC_NO,   KC_NO,   KC_MS_U, KC_NO,   KC_NO,
         KC_LSFT, KC_NO,   KC_MS_L, KC_MS_D, KC_MS_R, KC_NO,
         KC_CAPS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |   |   |   |    |   |   |   |
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [2] = LAYOUT_custom(
+    [2] = LAYOUT_split_3x6_3(
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,
         KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
@@ -149,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS,
         KC_NO,   KC_NO,   KC_COMM, KC_DOT,  DE_MINS, KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO
+        KC_NO,   KC_NO,   KC_NO
         ),
     /*  [3]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
@@ -162,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |   |   |   |    |   |   |   |
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [3] = LAYOUT_custom(
+    [3] = LAYOUT_split_3x6_3(
         RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, KC_NO,
         KC_NO,   RGB_RMOD,RGB_VAD, RGB_HUD, RGB_SAD, KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
@@ -171,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO
+        KC_NO,   KC_NO,   KC_NO
         )
 
 };
@@ -182,6 +182,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] = {ENCODER_CCW_CW(KC_VOLD,  KC_VOLU),   ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
     [1] = {ENCODER_CCW_CW(KC_WH_L,  KC_WH_R),   ENCODER_CCW_CW(KC_WH_U, KC_WH_D)},
     [2] = {ENCODER_CCW_CW(KC_NO,    KC_NO),     ENCODER_CCW_CW(KC_NO,   KC_NO)},
-    [3] = {ENCODER_CCW_CW(RGB_MOD,  RGB_RMOD),  ENCODER_CCW_CW(KC_NO,   KC_NO)}
+    [3] = {ENCODER_CCW_CW(KC_NO,    KC_NO),     ENCODER_CCW_CW(KC_NO,   KC_NO)}
     };
 #endif

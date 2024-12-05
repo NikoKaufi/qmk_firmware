@@ -17,44 +17,46 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true
+        // "encoder": true,
+        // "split": true
     },
     "diode_direction": "COL2ROW",
     "matrix_pins": {
-        "rows": ["GP0", "GP5", "GP6", "GP#"],
-        "cols": ["GP29", "GP2", "GP28", "GP3", "GP22", "GP4", "GP#"]
+        "rows": ["GP0", "GP5", "GP6", "GP8"],
+        "cols": ["GP29", "GP2", "GP28", "GP3", "GP22", "GP4", "GP9"]
     },
     "bootmagic": {
         "matrix": [0, 0]
     },
-    "enoder": {
-        "rotary": [
-            {
-                "pin_a": "GP23",
-                "pin_b": "GP21"
-            }
-        ]
-    },
+    // "enoder": {
+    //     "rotary": [
+    //         {
+    //             "pin_a": "GP23",
+    //             "pin_b": "GP21"
+    //         }
+    //     ]
+    // },
     "split": {
         // "soft_serial_pin": "XY",
         "matrix_pins": {
             "right": {
-                "rows": ["R1", "R2", "R3", "R4"],
-                "cols": ["C0", "C1", "C2", "C3", "C4", "C5", "C6"]
+                "rows": ["GP0", "GP26", "GP21", "GP23"],
+                "cols": ["GP8", "GP29", "GP4", "GP27", "GP3", "GP28", "GP2"]
             }
         },
         "bootmagic": {
             "matrix": [4, 6]
-        },
-        "encoder": {
-            "right": {
-                "rotary": [
-                    {
-                        "pin_a": "F6",
-                        "pin_b": "F7"
-                    }
-                ]
-            }
-        },
+        }
+        // "encoder": {
+        //     "right": {
+        //         "rotary": [
+        //             {
+        //                 "pin_a": "GP9",
+        //                 "pin_b": "GP7"
+        //             }
+        //         ]
+        //     }
+        // }
         // "transport": {
         //     "sync": {
         //         "matrix_state": true
