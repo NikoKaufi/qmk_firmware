@@ -3,49 +3,18 @@
 
 #pragma once
 
-/*
- * Feature disable options
- *  These options are also useful to firmware size reduction.
- */
-
-/* disable debug print */
-//#define NO_DEBUG
-
-/* disable print */
-//#define NO_PRINT
-
-/* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-
 /* Encoder Configuration */
 #ifdef ENCODER_ENABLE
-    //left
-    #define ENCODERS_PAD_A { GP23 }
-    #define ENCODERS_PAD_B { GP21 }
-    #define ENCODER_RESOLUTION 4
-    #define ENCODER_DEFAULT_POS 0x3
-    // JUST if other pins are used on the right side:
-    #define ENCODERS_PAD_A_RIGHT { GP9 }
-    #define ENCODERS_PAD_B_RIGHT { GP7 }
-    #define ENCODER_RESOLUTIONS_RIGHT 4
-    #define ENCODER_DEFAULT_POS_RIGHT 0x3
+    // #define ENCODER_DEFAULT_POS 0x3
+    // #define ENCODER_DEFAULT_POS_RIGHT 0x3
 #endif
 
 /* serial communication between halfs */
 #define SERIAL_USART_FULL_DUPLEX    // Enable full duplex operation mode.
-#define SERIAL_USART_TX_PIN GP16     // USART TX pin      //5v=, gnd=, GP1=, GP0=
+#define SERIAL_USART_TX_PIN GP16     // USART TX pin
 #define SERIAL_USART_RX_PIN GP12     // USART RX pin
-    // #define SERIAL_PIO_USE_PIO1      //changes the state machine to PIO1 (standard PIO0)
 
 #define EE_HANDS        //define right/left side by EEPROM/flash option
-
-#define SPLIT_USB_TIMEOUT 2000      //This sets the maximum timeout when detecting master/slave
-#define SPLIT_USB_TIMEOUT_POLL 10   // This sets the poll frequency when detecting master/slave
-
-#define SPLIT_WATCHDOG_ENABLE       //reboot the keyboard if no successful communication occurs within:
-#define SPLIT_WATCHDOG_TIMEOUT 2500
 
 /* Tap-Dance */
 #define TAPPING_TERM 175
