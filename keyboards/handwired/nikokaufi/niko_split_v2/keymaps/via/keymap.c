@@ -4,75 +4,48 @@
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
 
-/* MACROS */
-enum custom_keycodes {
-    OFF = SAFE_RANGE,
-    STP,
-};
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case OFF:
-        if (record->event.pressed) {
-            SEND_STRING(SS_LGUI("r"));
-            SEND_STRING(SS_DELAY(300));
-            SEND_STRING("shutdown /s /t 10 /f /c @Herunterfahren in 10 Sekunden@");
-            SEND_STRING(SS_DELAY(300));
-            SEND_STRING(SS_TAP(X_ENTER));
+/* TAP-DANCE*/
+#ifdef TAP_DANCE_ENABLE
+    enum {
+        TD_ESC_AF4,
+        TD_S_SS
+    };
+    void escaltf4(tap_dance_state_t *state, void *user_data) {
+        if (state->count >= 3) {
+            register_code(KC_LALT);
+            tap_code(KC_F4);
+            unregister_code(KC_LALT);
+            reset_tap_dance(state);
         }
-        else { //when keycode is released
+        else {
+            tap_code(KC_ESC);
         }
-        break;
-    case STP:
-        if (record->event.pressed) {
-            SEND_STRING(SS_LGUI("r"));
-            SEND_STRING(SS_DELAY(300));
-            SEND_STRING("shutdown /a");
-            SEND_STRING(SS_DELAY(300));
-            SEND_STRING(SS_TAP(X_ENTER));
+    }
+    void sss(tap_dance_state_t *state, void *user_data) {
+        if (state->count >= 3) {
+            tap_code(DE_SS);
         }
-        else { //when keycode is released
+        else {
+            tap_code(KC_S);
         }
-        break;
     }
-    return true;
-};
-
-/* TAP DANCE */
-enum {
-    TD_ESC_AF4,
-    TD_S_SS
-};
-void escaltf4(tap_dance_state_t *state, void *user_data) {
-    if (state->count >= 3) {
-        register_code(KC_LALT);
-        tap_code(KC_F4);
-        unregister_code(KC_LALT);
-        reset_tap_dance(state);
-    }
-    else {
-        tap_code(KC_ESC);
-    }
-}
-void sss(tap_dance_state_t *state, void *user_data) {
-    if (state->count >= 3) {
-        tap_code(DE_SS);
-    }
-    else {
-        tap_code(KC_S);
-    }
-}
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4),
-    [TD_S_SS] = ACTION_TAP_DANCE_FN(sss),
-};
+    tap_dance_action_t tap_dance_actions[] = {
+        [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4),
+        [TD_S_SS] = ACTION_TAP_DANCE_FN(sss),
+    };
+#endif
 
 /* CUSTOM KEYCODES */
+enum custom_keycodes {
+    OFF = SAFE_RANGE,
+    STP
+};
 #define SPC1 LT(1,KC_SPACE)
 #define ALT2 LT(2,KC_LALT)
 #define ENT_CTL RCTL_T(KC_ENT)
 #define ESC_AF4 TD(TD_ESC_AF4)
 #define S_SS TD(TD_S_SS)
-// home row mods
+    // home row mods
 #define A_SHI (LSFT_T(KC_A))
 #define S_ALT (LALT_T(TD_S_SS))
 #define D_STRG (LCTL_T(KC_D))
@@ -82,6 +55,7 @@ tap_dance_action_t tap_dance_actions[] = {
 #define L_ALT (RALT_T(KC_L))
 #define OE_SHI (RSFT_T(DE_ODIA))
 
+/* LAYER NAMES */
 enum layer_names {
     _0_ALPHA,
     _1_NAV,
@@ -113,7 +87,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_RALT, KC_BSPC, KC_ENT
         ),
     /*  [1]
-     *
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
      * │   │   │   │MS↑│   │   |            |   |   | ↑ |   |   |+*~|
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
@@ -213,13 +186,14 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     //     oled_render_boot(jump_to_bootloader);
     // }
 
-    //kopiert Luna Code!!!!!!!!
+    //ENDE Bootloader
+
         /* 32 * 32 logo */
     static void render_logo(void) {
         static const char PROGMEM hell_logo[] = {0x00, 0x80, 0xc0, 0xc0, 0x60, 0x60, 0x30, 0x30, 0x18, 0x1c, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x80, 0xe0, 0x78, 0x1e, 0x06, 0x00, 0x0c, 0x1c, 0x18, 0x30, 0x30, 0x60, 0x60, 0xc0, 0xc0, 0x80, 0x00, 0x01, 0x03, 0x07, 0x06, 0x0c, 0x0c, 0x18, 0x18, 0x30, 0x70, 0x60, 0x00, 0xc0, 0xf0, 0x3c, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x00, 0x60, 0x70, 0x30, 0x18, 0x18, 0x0c, 0x0c, 0x06, 0x07, 0x03, 0x01, 0x00, 0xf8, 0xf8, 0x80, 0x80, 0x80, 0xf8, 0xf8, 0x00, 0x80, 0xc0, 0xc0, 0x40, 0xc0, 0xc0, 0x80, 0x00, 0xf8, 0xf8, 0x00, 0xf8, 0xf8, 0x00, 0x08, 0x38, 0x08, 0x00, 0x38, 0x08, 0x30, 0x08, 0x38, 0x00, 0x1f, 0x1f, 0x01, 0x01, 0x01, 0x1f, 0x1f, 0x00, 0x0f, 0x1f, 0x1a, 0x12, 0x1a, 0x1b, 0x0b, 0x00, 0x1f, 0x1f, 0x00, 0x1f, 0x1f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
         oled_write_raw_P(hell_logo, sizeof(hell_logo));
-    }
+    } //ENDE logo
 
     /* 32 * 14 os logos */
     static const char PROGMEM windows_logo[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xbc, 0xbc, 0xbe, 0xbe, 0x00, 0xbe, 0xbe, 0xbf, 0xbf, 0xbf, 0xbf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x0f, 0x0f, 0x00, 0x0f, 0x0f, 0x1f, 0x1f, 0x1f, 0x1f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -228,7 +202,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
     /* Smart Backspace Delete */
 
-    bool            shift_held = false;
+    // bool            shift_held = false;  //keine Ahnung, evtl ein Keycode
     // static uint16_t held_shift = 0;      //keine Ahnung, evtl ein Keycode
 
     /* KEYBOARD PET START */
@@ -255,7 +229,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     bool isJumping  = false;
     bool showedJump = true;
 
-    /* logic */
+    /* Luna */
     static void render_luna(int LUNA_X, int LUNA_Y) {
         /* Sit */
         static const char PROGMEM sit[2][ANIM_SIZE] = {/* 'sit1', 32x22px */
@@ -365,10 +339,11 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
             anim_timer = timer_read32();
             animate_luna();
         }
-    }
+    } //ENDE Luna
 
     /* KEYBOARD PET END */
 
+    //OLED Slave Side
     static void print_logo_narrow(void) {
         render_logo();
 
@@ -384,8 +359,9 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
         oled_set_cursor(0, 15);
         oled_write(" wpm", false);
-    }
+    } //ENDE OLED Slave
 
+    //OLED Master Side
     static void print_status_narrow(void) {
         /* Print current mode */
         oled_set_cursor(0, 0);
@@ -432,7 +408,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
                 oled_write("Undef", false);
         }
 
-        /* caps lock */
+        /* caps lock on/off */
         oled_set_cursor(0, 8);
         oled_write("CPSLK", led_usb_state.caps_lock);
 
@@ -441,10 +417,9 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
         render_luna(0, 13);
 
         /* KEYBOARD PET RENDER END */
-    }
+    }//ENDE OLED Master
 
-    // oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; } //schon oben, aberm it kopiert
-
+    //Variablen + Bestimmung Master/Slave
     bool oled_task_user(void) {
         /* KEYBOARD PET VARIABLES START */
 
@@ -459,10 +434,76 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
             print_logo_narrow();
         }
         return false;
+    } //ENDE Variablen + Master/Slave
+
+#endif //OLED
+
+/* MACROS */
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case OFF:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("r"));
+                SEND_STRING(SS_DELAY(300));
+                SEND_STRING("shutdown /s /t 10 /f /c @Herunterfahren in 10 Sekunden@");
+                SEND_STRING(SS_DELAY(300));
+                SEND_STRING(SS_TAP(X_ENTER));
+            }
+            else { //when keycode is released
+            }
+            break;
+        case STP:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("r"));
+                SEND_STRING(SS_DELAY(300));
+                SEND_STRING("shutdown /a");
+                SEND_STRING(SS_DELAY(300));
+                SEND_STRING(SS_TAP(X_ENTER));
+            }
+            else { //when keycode is released
+            }
+            break;
+
+        //KEYBOARD PET STATUS START
+        #ifdef OLED_ENABLE
+            case KC_LCTL:
+            case KC_RCTL:
+                if (record->event.pressed) {
+                    isSneaking = true;
+                } else {
+                    isSneaking = false;
+                }
+                break;
+            case KC_SPC:
+                if (record->event.pressed) {
+                    isJumping  = true;
+                    showedJump = false;
+                } else {
+                    isJumping = false;
+                }
+                break;      //KEYBOARD PET STATUS END
+        #endif //OLED
     }
+    return true;
+}; //ENDE MACROS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* IDK, nur kopiert */
 
     // bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    //     switch (keycode) {
     //         case held_shift:
     //             if (record->event.pressed) {
     //                 set_single_persistent_default_layer(_QWERTY);
@@ -664,30 +705,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     //                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
     //             }
     //             return false;
-
-    //             /* KEYBOARD PET STATUS START */
-
-    //         case KC_LCTL:
-    //         case KC_RCTL:
-    //             if (record->event.pressed) {
-    //                 isSneaking = true;
-    //             } else {
-    //                 isSneaking = false;
-    //             }
-    //             break;
-    //         case KC_SPC:
-    //             if (record->event.pressed) {
-    //                 isJumping  = true;
-    //                 showedJump = false;
-    //             } else {
-    //                 isJumping = false;
-    //             }
-    //             break;
-
-    //             /* KEYBOARD PET STATUS END */
     //     }
     //     return true;
     // }
-
-
-#endif //OLED
