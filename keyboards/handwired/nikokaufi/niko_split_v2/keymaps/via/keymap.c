@@ -350,7 +350,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
             }
         }
 
-    #    if OLED_TIMEOUT > 0
+        #if OLED_TIMEOUT > 0
         /* the animation prevents the normal timeout from occuring */
         if (last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT) {
             oled_off();
@@ -358,7 +358,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
         } else {
             oled_on();
         }
-    #    endif
+        #endif
 
         /* animation timer */
         if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
