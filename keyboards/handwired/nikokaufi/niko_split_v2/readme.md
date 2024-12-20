@@ -1,22 +1,23 @@
 # niko_split
 
-![niko_split](https://i.imgur.com/fK2t78j.jpeg)
+![niko_split]
 
 *A short description of the keyboard/project*
-Split ergonomic column-staggered keyboard with 62 keys and 2 encoders
+Split ergonomic column-staggered keyboard with 42 keys, 2 encoders, 2 OLED screens, per key and underglow RGB.
+It includes an adoption of the keyboard pet Luna by [HellSingCoder](https://github.com/HellSingCoder/qmk_firmware/tree/master/keyboards/sofle/keymaps/helltm): [YouTube](https://www.youtube.com/watch?v=HgIQRazCAjo)
 
 * Keyboard Maintainer: [Nikolaj Kaufmann](https://github.com/NikoKaufi)
-* Hardware Supported: *Waveshare RP2040*
-* Hardware Availability: *www.amazon.de*
+* Hardware Supported: *RP2040 pro Micro*
+* Hardware Availability: *Aliexpress*
 
 Make example for this keyboard (after setting up your build environment):
 
-    make handwired/nikokaufi/niko_split:default
+    make handwired/nikokaufi/niko_split_v2:via
 
 Flashing examples for left/right side
 
-    qmk flash -kb niko_split -km via -bl uf2-split-left
-    qmk flash -kb niko_split -km via -bl uf2-split-right
+    qmk flash -kb niko_split_v2 -km via -bl uf2-split-left
+    qmk flash -kb niko_split_v2 -km via -bl uf2-split-right
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
