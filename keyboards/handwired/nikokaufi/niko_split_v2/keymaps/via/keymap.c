@@ -142,8 +142,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
     [_3_RGB] = LAYOUT_split_3x6_3(
-        RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, KC_NO,
-        KC_NO,   RGB_RMOD,RGB_VAD, RGB_HUD, RGB_SAD, KC_NO,
+        RM_TOGG, RM_NEXT, RM_VALU, RM_HUEU, RM_SATU, RM_SPDU,
+        KC_NO,   RM_PREV, RM_VALD, RM_HUED, RM_SATD, RM_SPDD,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,
         //right
