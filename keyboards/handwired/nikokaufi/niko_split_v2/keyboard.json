@@ -10,6 +10,9 @@
     "pid": "0x0001",
     "vid": "0x4E4B"
 },
+"build": {
+    "lto": true
+},
 "features": {
     "split": true,
     "bootmagic": true,
