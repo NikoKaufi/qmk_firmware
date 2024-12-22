@@ -35,3 +35,6 @@
 // /* rgb split */
 // #define RGBLED_SPLIT { 28, 28 }   //the number of LEDs connected on each half
 // #define RGBLIGHT_SPLIT          //sync RGB between halfs
+
+#define I2C1_SDA_PIN GP26  // SDA pin for I2C1
+#define I2C1_SCL_PIN GP27  // SCL pin for I2C1
