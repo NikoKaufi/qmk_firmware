@@ -47,7 +47,7 @@ enum custom_keycodes {
 #define S_SS TD(TD_S_SS)
     // home row mods
 #define A_SHI (LSFT_T(KC_A))
-#define S_ALT (LALT_T(TD_S_SS))
+#define S_ALT (LALT_T(KC_S))
 #define D_STRG (LCTL_T(KC_D))
 #define F_WIN (LWIN_T(KC_F))
 #define J_WIN (RWIN_T(KC_J))
