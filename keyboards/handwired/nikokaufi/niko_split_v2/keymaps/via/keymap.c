@@ -388,7 +388,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
             }
 
             /* switch frame */
-            current_frame = (current_frame + 1) % 2;
+            current_frame = (current_frame + 1) % 4;
 
             /* current status */
             if (led_usb_state.caps_lock) {
