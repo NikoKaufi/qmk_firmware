@@ -10,9 +10,9 @@
     "pid": "0x0001",
     "vid": "0x4E4B"
 },
-"build": {
-    "lto": true
-},
+// "build": {
+//     "lto": true
+// },
 "features": {
     "split": true,
     "bootmagic": true,
@@ -22,6 +22,7 @@
     "extrakey": true,
     "mousekey": true,
     "nkro": true,
+    "rgblight": true,
     "rgb_matrix": true,
     "oled": true,
     "wpm": true
@@ -120,7 +121,6 @@
 },
 "split": {
     "enabled": true,
-    // "soft_serial_pin": "XY",
     "matrix_pins": {
         "right": {
             "rows": ["GP0", "GP26", "GP21", "GP23"],
@@ -133,8 +133,8 @@
     "encoder": {
         "right": {
             "rotary": [{
-                "pin_a": "GP9",
-                "pin_b": "GP7",
+                "pin_a": "GP7",
+                "pin_b": "GP9",
                 "resolution": 4 //default
             }]
             // "deafult": {
@@ -144,6 +144,7 @@
     },
     "serial": {
         "driver": "vendor"
+        // "pin": "GP16"
     },
     "transport": {
         "sync": {
@@ -152,7 +153,8 @@
             "modifiers": true,
             "oled": true,
             "wpm": true,
-            "indicators": true
+            "indicators": true,
+            "activity": true
         },
         "watchdog": true,
         "watchdog_timeout": 2500
@@ -166,17 +168,24 @@
     "driver": "vendor",
     "pin": "GP1"
 },
+"rgblight": {
+    "led_count": 54,
+    "split": true,
+    "split_count": [27, 27],
+    "max_brightness": 128
+},
 "rgb_matrix": {
     "driver": "ws2812",
     "spit_count":[27,27],
     "sleep": true,
-    "max_brightness": 64,  //255 default
+    "max_brightness": 128,  //255 default
     "timeout": 120000,      //0 default, in ms
+    // "val_step": 68,         //default = 17, aber val max ist 1/4
     "default": {
         "animation": "cycle_spiral", //default
         "hue": 0,       //default
         "sat": 255,     //default
-        "val": 64,     //default = max_brightness
+        "val": 128,     //default = max_brightness
         "speed": 64    //default = 128
     },
     "layout": [
