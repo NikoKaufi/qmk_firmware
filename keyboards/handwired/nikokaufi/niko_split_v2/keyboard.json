@@ -22,7 +22,7 @@
     "extrakey": true,
     "mousekey": true,
     "nkro": true,
-    "rgblight": true,
+    // "rgblight": true,
     "rgb_matrix": true,
     "oled": true,
     "wpm": true

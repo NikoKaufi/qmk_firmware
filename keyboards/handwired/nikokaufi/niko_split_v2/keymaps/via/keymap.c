@@ -42,9 +42,9 @@ enum custom_keycodes {
 };
 #define SPC1 LT(1,KC_SPACE)
 #define ALT2 LT(2,KC_LALT)
-#define ENT_CTL RCTL_T(KC_ENT)
+#define ENT3 LT(3,KC_ENT)
 #define ESC_AF4 TD(TD_ESC_AF4)
-#define S_SS TD(TD_S_SS)
+// #define S_SS TD(TD_S_SS)
     // home row mods
 #define A_SHI (LSFT_T(KC_A))
 #define S_ALT (LALT_T(KC_S))
@@ -79,12 +79,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ESC_AF4, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,
         KC_TAB,  A_SHI,   S_ALT,   D_STRG,  F_WIN,   KC_G,
         DE_LABK, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,
-                                            MO(3), SPC1,    KC_LALT,   //KC_LGUI
+                                            KC_LGUI, SPC1,    ALT2,
         //right
-                 KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    EE_CLR,	//DE_UDIA,
+                 KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_UDIA,
                  KC_H,    J_WIN,   K_STRG,  L_ALT,   OE_SHI,  DE_ADIA,
         KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT,  DE_MINS, DE_SS,
-        KC_RALT, KC_BSPC, KC_ENT
+        KC_RALT, KC_BSPC, ENT3
         ),
     /*  [1]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
