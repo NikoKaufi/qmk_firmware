@@ -14,11 +14,17 @@
 #define TAPPING_TERM 200
 
 /* i2c -> OLED*/
-#define I2C1_SDA_PIN GP26  // SDA pin for I2C0 ?
-#define I2C1_SCL_PIN GP27  // SCL pin for I2C0 ?
-#define I2C_DRIVER_RIGHT I2CD2
-#define I2C2_SDA_PIN_RIGHT GP6
-#define I2C2_SCL_PIN_RIGHT GP5
+#ifdef OLED_ENABLE
+// #if eeconfig_is_left_hand
+    // #define I2C1_SDA_PIN GP26  // SDA pin for I2C0 ?
+    // #define I2C1_SCL_PIN GP27  // SCL pin for I2C0 ?
+// #else
+    // #define USE_I2C2
+    #define I2C1_SDA_PIN GP20
+    #define I2C1_SCL_PIN GP5
+#endif
+
+
 
 /* Encoder Configuration */
 // #ifdef ENCODER_ENABLE

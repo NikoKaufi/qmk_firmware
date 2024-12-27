@@ -10,9 +10,10 @@
     "pid": "0x0001",
     "vid": "0x4E4B"
 },
-// "build": {
-//     "lto": true
-// },
+"build": {
+    // "lto": true,
+    "firmware_format": "uf2"
+},
 "features": {
     "split": true,
     "bootmagic": true,
@@ -29,20 +30,20 @@
 },
 "oled": {
     "driver":"i2c", //default
-    "brightness": 255 //default
+    "brightness": 128 //default
 },
 "diode_direction": "COL2ROW",
 "matrix_pins": {
-    "rows": ["GP0", "GP5", "GP6", "GP8"],
-    "cols": ["GP29", "GP2", "GP28", "GP3", "GP22", "GP4", "GP9"]
+    "rows": ["GP0", "GP26", "GP21", "GP23"],
+    "cols": ["GP8", "GP29", "GP4", "GP27", "GP3", "GP28", "GP2"]
 },
 "bootmagic": {
     "matrix": [0, 0]
 },
 "encoder": {
     "rotary": [{
-        "pin_a": "GP23",
-        "pin_b": "GP21",
+        "pin_a": "GP7",
+        "pin_b": "GP9",
         "resolution": 4 //default
         }]
     // "deafult": {
@@ -144,7 +145,6 @@
     },
     "serial": {
         "driver": "vendor"
-        // "pin": "GP16"
     },
     "transport": {
         "sync": {
