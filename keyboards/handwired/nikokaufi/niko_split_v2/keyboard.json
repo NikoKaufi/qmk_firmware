@@ -34,16 +34,16 @@
 },
 "diode_direction": "COL2ROW",
 "matrix_pins": {
-    "rows": ["GP0", "GP26", "GP21", "GP23"],
-    "cols": ["GP8", "GP29", "GP4", "GP27", "GP3", "GP28", "GP2"]
+    "rows": ["GP0", "GP5", "GP6", "GP8"],
+    "cols": ["GP29", "GP2", "GP28", "GP3", "GP22", "GP4", "GP9"]
 },
 "bootmagic": {
     "matrix": [0, 0]
 },
 "encoder": {
     "rotary": [{
-        "pin_a": "GP7",
-        "pin_b": "GP9",
+        "pin_a": "GP23",
+        "pin_b": "GP21",
         "resolution": 4 //default
         }]
     // "deafult": {
@@ -150,9 +150,9 @@
         "sync": {
             "matrix_state": true,
             "layer_state": true,
-            "modifiers": true,
             "oled": true,
             "wpm": true,
+            "modifiers": true,
             "indicators": true,
             "activity": true
         },
