@@ -129,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_NO,   _______,
         //right
                  KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-                 KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    ZER_S,
+                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_S,   DE_HASH,
         KC_NO,   KC_NO,   KC_COMM, KC_DOT,  DE_MINS, KC_NO,   KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
@@ -275,26 +275,20 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 }
             }
         }
-        const int led_index = 0;
-            switch(get_highest_layer(layer_state)) {
-                case 3:
-                    rgb_matrix_set_color(led_index, RGB_BLUE);
-                    break;
-                case 4:
-                    rgb_matrix_set_color(led_index, RGB_RED);
-                    break;
-                case 5:
-                    rgb_matrix_set_color(led_index, RGB_PURPLE);
-                    break;
-                case 6:
-                    rgb_matrix_set_color(led_index, RGB_TEAL);
-                    break;
-                case 7:
-                    rgb_matrix_set_color(led_index, RGB_SPRINGGREEN);
-                    break;
-                default:
-                    break;
-            }
+        // const int led_index = 5;
+        //     switch(get_highest_layer(layer_state)) {
+        //         case 1:
+        //             rgb_matrix_set_color(led_index, RGB_BLUE);
+        //             break;
+        //         case 2:
+        //             rgb_matrix_set_color(led_index, RGB_RED);
+        //             break;
+        //         case 3:
+        //             rgb_matrix_set_color(led_index, RGB_PURPLE);
+        //             break;
+        //         default:
+        //             break;
+        //     }
     }
     return false;
 };
