@@ -66,25 +66,25 @@ enum layer_names {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*  [0]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-     * │ESC│ Q │ W │ E │ R │ T |            | Z | U | I | O | P | Ü |
+     * │ 1 │ Q │ W │ E │ R │ T |            | Z | U | I | O | P | Ü |
      * ├───┼───┼───┼───┼───┼───┤            |───┼───┼───┼───┼───┼───┤
-     * │TAB│ A │ S │ D │ F │ G |            | H | J | K | L | Ö | Ä |
+     * │ 2 │ A │ S │ D │ F │ G |            | H | J | K | L | Ö | Ä |
      * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
-     * │ < │ Y │ X │ C │ V | B |MUT|    |PLP| N | M | , | . | - | ß |
+     * │ 3 │ Y │ X │ C │ V | B | 5 |    | 6 | N | M | , | . | - | ß |
      * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
-     *                 |CTL|SPC|ALT|    |AGR|<- |ENT|
+     *                 | 4 |SPC|ALT|    |AGR|<- |ENT|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
     [_0_ALPHA] = LAYOUT_split_3x6_3(
-        ESC_AF4, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,
-        KC_TAB,  A_SHI,   S_ALT,   D_STRG,  F_WIN,   KC_G,
-        DE_LABK, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,
-                                            KC_LCTL, SPC1,    ALT2,
+        KC_1,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,
+        KC_2,    A_SHI,   S_ALT,   D_STRG,  F_WIN,   KC_G,
+        KC_3,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_5,
+                                            KC_4,    SPC1,    KC_LALT,
         //right
                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_UDIA,
                  KC_H,    J_WIN,   K_STRG,  L_ALT,   OE_SHI,  DE_ADIA,
-        KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT,  DE_MINS, DE_SS,
-        KC_RALT, KC_BSPC, ENT3
+        KC_6,    KC_N,    KC_M,    KC_COMM, KC_DOT,  DE_MINS, DE_SS,
+        KC_RALT, KC_BSPC, KC_ENT
         ),
     /*  [1]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
