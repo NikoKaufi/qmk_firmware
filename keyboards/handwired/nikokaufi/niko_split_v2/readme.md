@@ -5,16 +5,13 @@
 *A short description of the keyboard/project*
 Split ergonomic column-staggered keyboard with 42 keys, 2 encoders, 2 OLED screens, per key and underglow RGB.
 It includes an adoption of the keyboard pet Luna by [HellSingCoder](https://github.com/HellSingCoder/qmk_firmware/tree/master/keyboards/sofle/keymaps/helltm): [YouTube](https://www.youtube.com/watch?v=HgIQRazCAjo)
+achanged to a self animated cat
 
 * Keyboard Maintainer: [Nikolaj Kaufmann](https://github.com/NikoKaufi)
 * Hardware Supported: *RP2040 pro Micro*
 * Hardware Availability: *Aliexpress*
 
-Make example for this keyboard (after setting up your build environment):
-
-    make handwired/nikokaufi/niko_split_v2:via
-
-Flashing examples for left/right side
+Flashing examples for left/right side (after setting up your build environment):
 
     qmk flash -kb niko_split_v2 -km via -bl uf2-split-left
     qmk flash -kb niko_split_v2 -km via -bl uf2-split-right

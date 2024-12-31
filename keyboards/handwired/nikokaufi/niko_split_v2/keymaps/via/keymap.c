@@ -7,8 +7,8 @@
 /* TAP-DANCE*/
 #ifdef TAP_DANCE_ENABLE
     enum {
-        TD_ESC_AF4
-        // TD_S_SS
+        TD_ESC_AF4,
+        TD_BSP_ADV
     };
     void escaltf4(tap_dance_state_t *state, void *user_data) {
         if (state->count >= 3) {
@@ -21,17 +21,20 @@
             tap_code(KC_ESC);
         }
     }
-    // void sss(tap_dance_state_t *state, void *user_data) {
-    //     if (state->count >= 3) {
-    //         tap_code(DE_SS);
-    //     }
-    //     else {
-    //         tap_code(KC_S);
-    //     }
-    // }
+    void backspace_worddelete(tap_dance_state_t *state, void *user_data) {
+        if (state->count >= 3) {
+            register_code(KC_LCTL);
+            tap_code(KC_BSPC);
+            unregister_code(KC_LCTL);
+            reset_tap_dance(state);
+        }
+        else {
+            tap_code(KC_BSPC);
+        }
+    }
     tap_dance_action_t tap_dance_actions[] = {
-        [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4)
-        // [TD_S_SS] = ACTION_TAP_DANCE_FN(sss)
+        [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4),
+        [TD_BSP_ADV] = ACTION_TAP_DANCE_FN(backspace_worddelete)
     };
 #endif
 
@@ -44,7 +47,7 @@ enum custom_keycodes {
 #define ALT2 LT(2,KC_LALT)
 #define ENT3 LT(3,KC_ENT)
 #define ESC_AF4 TD(TD_ESC_AF4)
-// #define S_SS TD(TD_S_SS)
+#define BSP_ADV TD(TD_BSP_ADV)
     // home row mods
 #define A_SHI (LSFT_T(KC_A))
 #define S_ALT (LALT_T(KC_S))
@@ -55,8 +58,8 @@ enum custom_keycodes {
 #define L_ALT (RALT_T(KC_L))
 #define OE_SHI (RSFT_T(DE_ODIA))
 
-#define ONE_S (LSFT_T(KC_1))
-#define ZER_S (RSFT_T(DE_0))
+#define ONE_SHI (LSFT_T(KC_1))
+#define ZER_SHI (RSFT_T(DE_0))
 
 /* LAYER NAMES */
 enum layer_names {
@@ -87,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_UDIA,
                  KC_H,    J_WIN,   K_STRG,  L_ALT,   OE_SHI,  DE_ADIA,
         KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT,  DE_MINS, DE_SS,
-        KC_RALT, KC_BSPC, ENT3
+        KC_RALT, BSP_ADV, ENT3
         ),
     /*  [1]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
@@ -124,12 +127,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [_2_NUM] = LAYOUT_split_3x6_3(
         KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,
-        KC_TAB,  ONE_S,   KC_2,    KC_3,    KC_4,    KC_5,
+        KC_TAB,  ONE_SHI, KC_2,    KC_3,    KC_4,    KC_5,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                             KC_NO,   KC_LCTL, _______,
         //right
                  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_S,   DE_HASH,
+                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_SHI, DE_HASH,
         KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  DE_MINS, KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
@@ -170,7 +173,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 /* Combo */
 #ifdef COMBO_ENABLE
-    const uint16_t PROGMEM spc_bspc_del[] = {SPC1, KC_BSPC, COMBO_END};
+    const uint16_t PROGMEM spc_bspc_del[] = {SPC1, BSP_ADV, COMBO_END};
     combo_t key_combos[] = {
         COMBO(spc_bspc_del, KC_DEL)
     };
@@ -186,8 +189,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
             case L_ALT: return 750;
             case D_STRG: return 750;
             case K_STRG: return 750;
-            case ONE_S: return 750;
-            case ZER_S: return 750;
+            case ONE_SHI: return 750;
+            case ZER_SHI: return 750;
             default: return TAPPING_TERM; //200
         }
     }
@@ -200,8 +203,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
             case D_STRG: return true;
             case K_STRG: return true;
             case SPC1: return true;
-            case ONE_S: return true;
-            case ZER_S: return true;
+            case ONE_SHI: return true;
+            case ZER_SHI: return true;
             default: return false;
         }
     }
@@ -239,8 +242,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         //KEYBOARD PET Sneak/Jump
         #ifdef OLED_ENABLE
-            case D_STRG:
-            case K_STRG:
+            case KC_LCTL:
+            case KC_RCTL:
                 if (record->event.pressed) {
                     isSneaking = true;
                 } else {
@@ -275,20 +278,17 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 }
             }
         }
-        // const int led_index = 5;
-        //     switch(get_highest_layer(layer_state)) {
-        //         case 1:
-        //             rgb_matrix_set_color(led_index, RGB_BLUE);
-        //             break;
-        //         case 2:
-        //             rgb_matrix_set_color(led_index, RGB_RED);
-        //             break;
-        //         case 3:
-        //             rgb_matrix_set_color(led_index, RGB_PURPLE);
-        //             break;
-        //         default:
-        //             break;
-        //     }
+        const int led_index = 8; // 8 = ESC
+            switch(get_highest_layer(layer_state)) {
+                case 1:
+                    rgb_matrix_set_color(led_index, RGB_BLUE);
+                    break;
+                case 2:
+                    rgb_matrix_set_color(led_index, RGB_RED);
+                    break;
+                default:
+                    break;
+            }
     }
     return false;
 };

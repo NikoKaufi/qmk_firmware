@@ -30,8 +30,7 @@
 },
 "oled": {
     "driver":"i2c", //default
-    "brightness": 128, //default
-    "timeout": 90000
+    "brightness": 128, //defaultß
 },
 "diode_direction": "COL2ROW",
 "matrix_pins": {

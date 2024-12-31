@@ -4,7 +4,7 @@
 #pragma once
 
 /* serial communication between halfs */
-#define SERIAL_USART_FULL_DUPLEX    // Enable full duplex operation mode.
+#define SERIAL_USART_FULL_DUPLEX     // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN GP16     // USART TX pin
 #define SERIAL_USART_RX_PIN GP12     // USART RX pin
 
@@ -19,7 +19,7 @@
     #define I2C1_SDA_PIN GP6    // right SDA pin for I2C1
     #define I2C1_SCL_PIN GP11   // right SCL pin for I2C1
 #endif
-// #define OLED_TIMEOUT 90000  //in ms, default = 60000
+#define OLED_TIMEOUT 90000      //in ms, default = 60000
 
 /* Tap-Dance */
 #define TAPPING_TERM 200
