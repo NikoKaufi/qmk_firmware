@@ -1,11 +1,12 @@
 # niko_split
 
-![niko_split]
+![niko_split](https://github.com/NikoKaufi/qmk_firmware/tree/master/keyboards/handwired/nikokaufi/niko_split_v2/pictures/niko_split_v2.jpg)
 
 *A short description of the keyboard/project*
 Split ergonomic column-staggered keyboard with 42 keys, 2 encoders, 2 OLED screens, per key and underglow RGB.
 It includes an adoption of the keyboard pet Luna by [HellSingCoder](https://github.com/HellSingCoder/qmk_firmware/tree/master/keyboards/sofle/keymaps/helltm): [YouTube](https://www.youtube.com/watch?v=HgIQRazCAjo)
-achanged to a self animated cat
+
+Changed Luna to a cat animated by Ruth and me
 
 * Keyboard Maintainer: [Nikolaj Kaufmann](https://github.com/NikoKaufi)
 * Hardware Supported: *RP2040 pro Micro*
