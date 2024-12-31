@@ -43,4 +43,4 @@ On both sides:
 
 ## Building Process
 
-If you're interested in the Building Process or need help on planning etc., I've made a [Youtube-Video](https://www.youtube.com/watch?v=oRykmV-ImSI&t=30s&pp=ygUobmlrb2xhaiBrYXVmbWFubiBob3cgdG8gYnVpbGQgYSBrZXlib2FyZA%3D%3D) on how to build this keyboard.
+If you're interested in the Building Process or need help on planning etc., I will make a [Youtube-Video](https://www.youtube.com/@nikolajkaufmann3067) on how to build this keyboard.
