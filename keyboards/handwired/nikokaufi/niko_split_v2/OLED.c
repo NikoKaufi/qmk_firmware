@@ -20,6 +20,7 @@ void oled_render_boot(bool bootloader) {
 
 //ENDE Bootloader
 
+int oledstatus = 1;
     /* 32 * 32 logo */
 static void render_babycat(void) {
     static const char PROGMEM babycat[] = {
@@ -239,7 +240,7 @@ static void render_cat(int CAT_X, int CAT_Y) {
 
     #if OLED_TIMEOUT > 0
     /* the animation prevents the normal timeout from occuring */
-    if (last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT) {
+    if ((last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT) || oledstatus == 0) {
         oled_off();
         return;
     } else {

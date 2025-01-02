@@ -43,7 +43,7 @@ enum custom_keycodes {
     OFF = SAFE_RANGE,
     STP,
     O_ON,
-    O_OFF
+    O_OFF,
     O_BUP,
     O_BDN
 };
@@ -219,6 +219,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #endif //OLED
 
 /* MACROS */
+int oled_helligkeit = 128;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case OFF: //Herunterfahren
@@ -228,10 +229,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("shutdown /s /t 10 /f /c @Herunterfahren in 10 Sekunden@");
                 SEND_STRING(SS_DELAY(300));
                 SEND_STRING(SS_TAP(X_ENTER));
-            }
-            else { //when keycode is released
-            }
-            break;
+            }else { /*when keycode is released*/ } break;
         case STP: //Herunterfahren abbrechen
             if (record->event.pressed) {
                 SEND_STRING(SS_LGUI("r"));
@@ -239,17 +237,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("shutdown /a");
                 SEND_STRING(SS_DELAY(300));
                 SEND_STRING(SS_TAP(X_ENTER));
-            }
-            else { //when keycode is released
-            }
-            break;
+            }else { /*when keycode is released*/ } break;
         case O_ON:
             if (record->event.pressed) {
-                OLED ON
-            }
-            else { //when keycode is released
-            }
-            break;
+                oledstatus = 1;
+            }else { /*when keycode is released*/ } break;
+        case O_OFF:
+            if (record->event.pressed) {
+                oledstatus = 0;
+            }else { /*when keycode is released*/ } break;
+        case O_BUP:
+            if (record->event.pressed) {
+                oled_helligkeit = oled_helligkeit + 16;
+                oled_set_brightness(oled_helligkeit);
+            }else { /*when keycode is released*/ } break;
+        case O_BDN:
+            if (record->event.pressed) {
+                oled_helligkeit = oled_helligkeit - 16;
+                oled_set_brightness(oled_helligkeit);
+            }else { /*when keycode is released*/ } break;
+
 
         //KEYBOARD PET Sneak/Jump
         #ifdef OLED_ENABLE
