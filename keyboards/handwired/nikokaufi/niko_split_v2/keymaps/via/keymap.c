@@ -41,7 +41,11 @@
 /* CUSTOM KEYCODES */
 enum custom_keycodes {
     OFF = SAFE_RANGE,
-    STP
+    STP,
+    O_ON,
+    O_OFF
+    O_BUP,
+    O_BDN
 };
 #define SPC1 LT(1,KC_SPACE)
 #define ALT2 LT(2,KC_LALT)
@@ -138,9 +142,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     /*  [3]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-     * │TOG│MOU│VAU│HUU│SAU│SPU|            |   |   |   |   |   |   |
+     * │TOG│MOU│VAU│HUU│SAU│SPU|            |   |   |OOF|OBU|   |   |
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
-     * │   │RMO│VAD│HUD│SAD│SPD|            |   |   |   |   |   |   |
+     * │   │RMO│VAD│HUD│SAD│SPD|            |   |   |OON|OBD|   |   |
      * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │   |   |TOG|    |   |   |   |   |   |   |   |
      * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
@@ -153,8 +157,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RM_TOGG,
                                             STP,     OFF,     KC_NO,
         //right
-                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                 KC_NO,   KC_NO,   O_ON,    O_BUP,   KC_NO,   KC_NO,
+                 KC_NO,   KC_NO,   O_OFF,   O_BDN,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   _______
         )
@@ -235,6 +239,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("shutdown /a");
                 SEND_STRING(SS_DELAY(300));
                 SEND_STRING(SS_TAP(X_ENTER));
+            }
+            else { //when keycode is released
+            }
+            break;
+        case O_ON:
+            if (record->event.pressed) {
+                OLED ON
             }
             else { //when keycode is released
             }
