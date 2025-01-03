@@ -7,8 +7,8 @@
 /* TAP-DANCE*/
 #ifdef TAP_DANCE_ENABLE
     enum {
-        TD_ESC_AF4,
-        TD_BSP_ADV
+        TD_ESC_AF4
+        // TD_BSP_ADV
     };
     void escaltf4(tap_dance_state_t *state, void *user_data) {
         if (state->count >= 3) {
@@ -21,20 +21,20 @@
             tap_code(KC_ESC);
         }
     }
-    void backspace_worddelete(tap_dance_state_t *state, void *user_data) {
-        if (state->count >= 3) {
-            register_code(KC_LCTL);
-            tap_code(KC_BSPC);
-            unregister_code(KC_LCTL);
-            reset_tap_dance(state);
-        }
-        else {
-            tap_code(KC_BSPC);
-        }
-    }
+    // void backspace_worddelete(tap_dance_state_t *state, void *user_data) {
+    //     if (state->count >= 3) {
+    //         register_code(KC_LCTL);
+    //         tap_code(KC_BSPC);
+    //         unregister_code(KC_LCTL);
+    //         reset_tap_dance(state);
+    //     }
+    //     else {
+    //         tap_code(KC_BSPC);
+    //     }
+    // }
     tap_dance_action_t tap_dance_actions[] = {
-        [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4),
-        [TD_BSP_ADV] = ACTION_TAP_DANCE_FN(backspace_worddelete)
+        [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4)
+        // [TD_BSP_ADV] = ACTION_TAP_DANCE_FN(backspace_worddelete)
     };
 #endif
 
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_UDIA,
                  KC_H,    J_WIN,   K_STRG,  L_ALT,   OE_SHI,  DE_ADIA,
         KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT,  DE_MINS, DE_SS,
-        KC_RALT, BSP_ADV, ENT3
+        KC_RALT, KC_BSPC, ENT3
         ),
     /*  [1]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
@@ -177,7 +177,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 /* Combo */
 #ifdef COMBO_ENABLE
-    const uint16_t PROGMEM spc_bspc_del[] = {SPC1, BSP_ADV, COMBO_END};
+    const uint16_t PROGMEM spc_bspc_del[] = {SPC1, KC_BSPC, COMBO_END};
     combo_t key_combos[] = {
         COMBO(spc_bspc_del, KC_DEL)
     };
