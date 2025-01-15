@@ -238,28 +238,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_DELAY(300));
                 SEND_STRING(SS_TAP(X_ENTER));
             }else { /*when keycode is released*/ } break;
-        case O_ON:
-            if (record->event.pressed) {
-                oledstatus = 1;
-            }else { /*when keycode is released*/ } break;
-        case O_OFF:
-            if (record->event.pressed) {
-                oledstatus = 0;
-            }else { /*when keycode is released*/ } break;
-        case O_BUP:
-            if (record->event.pressed) {
-                oled_helligkeit = oled_helligkeit + 16;
-                oled_set_brightness(oled_helligkeit);
-            }else { /*when keycode is released*/ } break;
-        case O_BDN:
-            if (record->event.pressed) {
-                oled_helligkeit = oled_helligkeit - 16;
-                oled_set_brightness(oled_helligkeit);
-            }else { /*when keycode is released*/ } break;
-
-
-        //KEYBOARD PET Sneak/Jump
         #ifdef OLED_ENABLE
+            case O_ON:
+                if (record->event.pressed) {
+                    oledstatus = 1;
+                }else { /*when keycode is released*/ } break;
+            case O_OFF:
+                if (record->event.pressed) {
+                    oledstatus = 0;
+                }else { /*when keycode is released*/ } break;
+            case O_BUP:
+                if (record->event.pressed) {
+                    oled_helligkeit = oled_helligkeit + 16;
+                    oled_set_brightness(oled_helligkeit);
+                }else { /*when keycode is released*/ } break;
+            case O_BDN:
+                if (record->event.pressed) {
+                    oled_helligkeit = oled_helligkeit - 16;
+                    oled_set_brightness(oled_helligkeit);
+                }else { /*when keycode is released*/ } break;
+
+            //KEYBOARD PET Sneak/Jump
             case KC_LCTL:
             case KC_RCTL:
                 if (record->event.pressed) {
