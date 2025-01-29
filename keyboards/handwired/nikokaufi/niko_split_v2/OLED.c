@@ -63,6 +63,7 @@ static const char PROGMEM mac_logo[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 /* variables */
 uint32_t anim_timer = 0;
 uint8_t current_frame = 0;
+uint32_t extra_frame = 0;
 
 int   current_wpm = 0;
 led_t led_usb_state;
@@ -237,6 +238,17 @@ static void render_cat(int CAT_X, int CAT_Y) {
             oled_write_raw_P(run[current_frame], ANIM_SIZE);
         }
     }
+    void goingtosleep(void) {
+            if (last_input_activity_elapsed() = 30000) {
+                extra_frame = 0;
+            
+            }else if (last_input_activity_elapsed() > 30000 && last_input_activity_elapsed() < 30000) { 
+                oled_write_raw_P(turn_sleep[extra_frame], ANIM_SIZE);
+            
+            } else {
+                oled_write_raw_P(sleep[current_frame], ANIM_SIZE);
+            }
+    }
 
     #if OLED_TIMEOUT > 0
     /* the animation prevents the normal timeout from occuring */
@@ -245,6 +257,10 @@ static void render_cat(int CAT_X, int CAT_Y) {
         return;
     } else {
         oled_on();
+        if (last_input_activity_elapsed() > 30000) {
+            goingtosleep();
+        }
+        
     }
     #endif
 
