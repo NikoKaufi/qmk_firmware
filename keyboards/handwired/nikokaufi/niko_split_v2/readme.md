@@ -6,7 +6,7 @@
 Split ergonomic column-staggered keyboard with 42 keys, 2 encoders, 2 OLED screens, per key and underglow RGB.
 It includes an adoption of the keyboard pet Luna by [HellSingCoder](https://github.com/HellSingCoder/qmk_firmware/tree/master/keyboards/sofle/keymaps/helltm): [YouTube](https://www.youtube.com/watch?v=HgIQRazCAjo)
 
-Changed Luna to a cat animated by Ruth and me
+Changed Luna to a cat animated by [Ruth](https://github.com/nikolr4242) and me
 
 * Keyboard Maintainer: [Nikolaj Kaufmann](https://github.com/NikoKaufi)
 * Hardware Supported: *RP2040 pro Micro*
