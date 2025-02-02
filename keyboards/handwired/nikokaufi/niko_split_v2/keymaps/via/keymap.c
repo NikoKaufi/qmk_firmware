@@ -102,16 +102,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
      * │CAP│SHI│MS←│MS↓│MS→│Po1|            |End| ← | ↓ | → |SHI|#' |
      * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   |MS1|MS1|    |MS2|NKR|   |MS3|   |   |   |
+     * │LCK│   │   │   │   |MS1|MS1|    |MS2|NKR|   |MS3|   |   |   |
      * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
      *                 |CTL|/1\|ALT|    |AGR|<- |Win|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [_1_NAV] = LAYOUT_split_3x6_3(
+    [_1_NAV] = LAYOUT_split_3x6_3( 
         QK_GESC, KC_NO,   KC_NO,   KC_MS_U, KC_NO,   KC_PGUP,
         KC_CAPS, KC_LSFT, KC_MS_L, KC_MS_D, KC_MS_R, KC_HOME,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
-                                            KC_LCTL, _______, KC_LALT,
+        QK_LLCK, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
+                                            KC_LCTL, QK_LLCK, KC_LALT,
         //right
                  KC_PGDN, KC_NO,   KC_UP,   KC_NO,   KC_NO,   DE_PLUS,
                  KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, DE_HASH,

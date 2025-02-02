@@ -26,7 +26,8 @@
     "combo": true,
     "rgb_matrix": true,
     "oled": true,
-    "wpm": true
+    "wpm": true,
+    "layer_lock": true
 },
 "oled": {
     "driver":"i2c", //default
