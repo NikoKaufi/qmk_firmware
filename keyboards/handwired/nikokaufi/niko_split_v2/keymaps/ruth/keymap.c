@@ -27,9 +27,7 @@
 
 /* CUSTOM KEYCODES */
 enum custom_keycodes {
-    OFF = SAFE_RANGE,
-    STP,
-    O_ON,
+    O_ON = SAFE_RANGE,
     O_OFF,
     O_BUP,
     O_BDN
@@ -135,14 +133,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │   |   |TOG|    |   |   |   |   |   |   |   |
      * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
-     *                 |STP|OFF|   |    |   |   |/3\|
+     *                 |   |   |   |    |   |   |/3\|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
     [_3_RGB] = LAYOUT_split_3x6_3(
         RM_TOGG, RM_NEXT, RM_VALU, RM_HUEU, RM_SATU, RM_SPDU,
         KC_NO,   RM_PREV, RM_VALD, RM_HUED, RM_SATD, RM_SPDD,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RM_TOGG,
-                                            STP,     OFF,     KC_NO,
+                                            KC_NO,   KC_NO,   KC_NO,
         //right
                  KC_NO,   KC_NO,   O_ON,    O_BUP,   KC_NO,   KC_NO,
                  KC_NO,   KC_NO,   O_OFF,   O_BDN,   KC_NO,   KC_NO,
@@ -239,22 +237,6 @@ enum combo_events {
 int oled_helligkeit = 128;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case OFF: //Herunterfahren
-            if (record->event.pressed) {
-                SEND_STRING(SS_LGUI("r"));
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING("shutdown /s /t 10 /f /c @Herunterfahren in 10 Sekunden@");
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING(SS_TAP(X_ENTER));
-            }else { /*when keycode is released*/ } break;
-        case STP: //Herunterfahren abbrechen
-            if (record->event.pressed) {
-                SEND_STRING(SS_LGUI("r"));
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING("shutdown /a");
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING(SS_TAP(X_ENTER));
-            }else { /*when keycode is released*/ } break;
         #ifdef OLED_ENABLE
             case O_ON:
                 if (record->event.pressed) {
@@ -326,208 +308,3 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
     return false;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* IDK, nur kopiert */
-
-    // bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    //         case held_shift:
-    //             if (record->event.pressed) {
-    //                 set_single_persistent_default_layer(_QWERTY);
-    //             }
-    //             return false;
-    //         case KC_GAMING:
-    //             if (record->event.pressed) {
-    //                 set_single_persistent_default_layer(_GAMING);
-    //             }
-    //             return false;
-    //         case KC_LOWER:
-    //             if (record->event.pressed) {
-    //                 layer_on(_LOWER);
-    //                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-    //             } else {
-    //                 layer_off(_LOWER);
-    //                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-    //             }
-    //             return false;
-    //         case KC_PRVWD:
-    //             if (record->event.pressed) {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     register_mods(mod_config(MOD_LALT));
-    //                     register_code(KC_LEFT);
-    //                 } else {
-    //                     register_mods(mod_config(MOD_LCTL));
-    //                     register_code(KC_LEFT);
-    //                 }
-    //             } else {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     unregister_mods(mod_config(MOD_LALT));
-    //                     unregister_code(KC_LEFT);
-    //                 } else {
-    //                     unregister_mods(mod_config(MOD_LCTL));
-    //                     unregister_code(KC_LEFT);
-    //                 }
-    //             }
-    //             break;
-    //         case KC_NXTWD:
-    //             if (record->event.pressed) {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     register_mods(mod_config(MOD_LALT));
-    //                     register_code(KC_RIGHT);
-    //                 } else {
-    //                     register_mods(mod_config(MOD_LCTL));
-    //                     register_code(KC_RIGHT);
-    //                 }
-    //             } else {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     unregister_mods(mod_config(MOD_LALT));
-    //                     unregister_code(KC_RIGHT);
-    //                 } else {
-    //                     unregister_mods(mod_config(MOD_LCTL));
-    //                     unregister_code(KC_RIGHT);g
-    //                 }
-    //             }
-    //             break;
-    //         case KC_LSTRT:
-    //             if (record->event.pressed) {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     /* CMD-arrow on Mac, but we have CTL and GUI swapped */
-    //                     register_mods(mod_config(MOD_LCTL));
-    //                     register_code(KC_LEFT);
-    //                 } else {
-    //                     register_code(KC_HOME);
-    //                 }
-    //             } else {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     unregister_mods(mod_config(MOD_LCTL));
-    //                     unregister_code(KC_LEFT);
-    //                 } else {
-    //                     unregister_code(KC_HOME);
-    //                 }
-    //             }
-    //             break;
-    //         case KC_LEND:
-    //             if (record->event.pressed) {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     /* CMD-arrow on Mac, but we have CTL and GUI swapped */
-    //                     register_mods(mod_config(MOD_LCTL));
-    //                     register_code(KC_RIGHT);
-    //                 } else {
-    //                     register_code(KC_END);
-    //                 }
-    //             } else {
-    //                 if (keymap_config.swap_lctl_lgui) {
-    //                     unregister_mods(mod_config(MOD_LCTL));
-    //                     unregister_code(KC_RIGHT);
-    //                 } else {
-    //                     unregister_code(KC_END);
-    //                 }
-    //             }
-    //             break;
-    //         case KC_DLINE:
-    //             if (record->event.pressed) {
-    //                 register_mods(mod_config(MOD_LCTL));
-    //                 register_code(KC_BSPC);
-    //             } else {
-    //                 unregister_mods(mod_config(MOD_LCTL));
-    //                 unregister_code(KC_BSPC);
-    //             }
-    //             break;
-    //         case KC_COPY:
-    //             if (record->event.pressed) {
-    //                 register_mods(mod_config(MOD_LCTL));
-    //                 register_code(KC_C);
-    //             } else {
-    //                 unregister_mods(mod_config(MOD_LCTL));
-    //                 unregister_code(KC_C);
-    //             }
-    //             return false;
-    //         case KC_PASTE:
-    //             if (record->event.pressed) {
-    //                 register_mods(mod_config(MOD_LCTL));
-    //                 register_code(KC_V);
-    //             } else {
-    //                 unregister_mods(mod_config(MOD_LCTL));
-    //                 unregister_code(KC_V);
-    //             }
-    //             return false;
-    //         case KC_CUT:
-    //             if (record->event.pressed) {
-    //                 register_mods(mod_config(MOD_LCTL));
-    //                 register_code(KC_X);
-    //             } else {
-    //                 unregister_mods(mod_config(MOD_LCTL));
-    //                 unregister_code(KC_X);
-    //             }
-    //             return false;
-    //             break;
-    //         case KC_UNDO:
-    //             if (record->event.pressed) {
-    //                 register_mods(mod_config(MOD_LCTL));
-    //                 register_code(KC_Z);
-    //             } else {
-    //                 unregister_mods(mod_config(MOD_LCTL));
-    //                 unregister_code(KC_Z);
-    //             }
-    //             return false;
-
-    //             /* Smart Backspace Delete */
-
-    //         case KC_RSFT:
-    //         case KC_LSFT:
-    //             shift_held = record->event.pressed;
-    //             held_shift = keycode;
-    //             break;
-    //         case KC_BSPC_DEL:
-    //             if (record->event.pressed) {
-    //                 if (shift_held) {
-    //                     unregister_code(held_shift);
-    //                     register_code(KC_DEL);
-    //                 } else {
-    //                     register_code(KC_BSPC);
-    //                 }
-    //             } else {
-    //                 unregister_code(KC_DEL);
-    //                 unregister_code(KC_BSPC);
-    //                 if (shift_held) {
-    //                     register_code(held_shift);
-    //                 }
-    //             }
-    //             return false;
-
-    //             /* LAYER */
-
-    //         case KC_LAYER:
-    //             if (record->event.pressed) {
-    //                 if (shift_held) {
-    //                     if (record->event.pressed) {
-    //                         if (get_highest_layer(default_layer_state) == _QWERTY) {
-    //                             set_single_persistent_default_layer(_GAMING);
-    //                         } else if (get_highest_layer(default_layer_state) == _GAMING) {
-    //                             set_single_persistent_default_layer(_QWERTY);
-    //                         }
-    //                     }
-    //                 } else {
-    //                     layer_on(_LOWER);
-    //                     update_tri_layer(_LOWER, _RAISE, _ADJUST);
-    //                 }
-    //             } else {
-    //                 layer_off(_LOWER);
-    //                 update_tri_layer(_LOWER, _RAISE, _ADJUST);
-    //             }
-    //             return false;
-    //     }
-    //     return true;
-    // }
