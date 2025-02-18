@@ -176,12 +176,42 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #endif //ENCODER_MAP
 
 /* Combo */
-#ifdef COMBO_ENABLE
-    const uint16_t PROGMEM spc_bspc_del[] = {SPC1, KC_BSPC, COMBO_END};
-    combo_t key_combos[] = {
-        COMBO(spc_bspc_del, KC_DEL)
-    };
-#endif //Combo
+enum combo_events {
+    DESK_RI,
+    DESK_LE,
+  };
+  #ifdef COMBO_ENABLE
+      const uint16_t PROGMEM spc_bspc_del[]  = {SPC1, KC_BSPC, COMBO_END};
+      const uint16_t PROGMEM desktop_right[] = {KC_G, DE_H, COMBO_END};
+      const uint16_t PROGMEM desktop_left[]  = {KC_B, KC_N, COMBO_END};
+      combo_t key_combos[] = {
+          COMBO(spc_bspc_del, KC_DEL),
+          [DESK_RI] = COMBO_ACTION(desktop_right),
+          [DESK_LE] = COMBO_ACTION(desktop_left)
+      };
+      void process_combo_event(uint16_t combo_index, bool pressed) {
+          switch(combo_index) {
+              case DESK_RI:
+                  if (pressed) {
+                      register_code(KC_LCTL);
+                      register_code(KC_LGUI);
+                      tap_code(KC_RGHT);
+                      unregister_code(KC_LCTL);
+                      unregister_code(KC_LGUI);
+                  }
+                  break;
+              case DESK_LE:
+                  if (pressed) {
+                      register_code(KC_LCTL);
+                      register_code(KC_LGUI);
+                      tap_code(KC_LEFT);
+                      unregister_code(KC_LCTL);
+                      unregister_code(KC_LGUI);
+                  }
+                  break;
+          }
+      }
+  #endif //Combo
 
 /* TAP-DANCE */
 #ifdef TAP_DANCE_ENABLE
