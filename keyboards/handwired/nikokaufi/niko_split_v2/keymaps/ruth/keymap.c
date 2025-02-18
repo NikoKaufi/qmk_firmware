@@ -162,6 +162,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 /* Combo */
 enum combo_events {
+  DEL,
   DESK_RI,
   DESK_LE,
 };
@@ -170,7 +171,7 @@ enum combo_events {
     const uint16_t PROGMEM desktop_right[] = {KC_T, DE_Z, COMBO_END};
     const uint16_t PROGMEM desktop_left[]  = {KC_G, KC_H, COMBO_END};
     combo_t key_combos[] = {
-        COMBO(spc_bspc_del, KC_DEL),
+        [DEL] = COMBO(spc_bspc_del, KC_DEL),
         [DESK_RI] = COMBO_ACTION(desktop_right),
         [DESK_LE] = COMBO_ACTION(desktop_left)
     };
