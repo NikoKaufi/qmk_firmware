@@ -2,6 +2,7 @@
 "manufacturer": "Nikolaj Kaufmann",
 "keyboard_name": "niko_split_v2",
 "maintainer": "NikoKaufi",
+"host_language": "german",
 "bootloader": "rp2040",
 "processor": "RP2040",
 // "url": "",
@@ -27,11 +28,13 @@
     "rgb_matrix": true,
     "oled": true,
     "wpm": true,
-    "layer_lock": true
+    "layer_lock": true,
+    "leader_key": true,
+    "caps_word": true
 },
 "oled": {
     "driver":"i2c", //default
-    "brightness": 128, //defaultß
+    "brightness": 128, //default
 },
 "diode_direction": "COL2ROW",
 "matrix_pins": {
@@ -53,6 +56,10 @@
 },
 "dynamic_keymap": {
     "layer_count": 4
+},
+"leader_key": {
+    "timing": true,
+    "timeout": 200
 },
 "layouts": {
     "LAYOUT_split_3x6_3": {

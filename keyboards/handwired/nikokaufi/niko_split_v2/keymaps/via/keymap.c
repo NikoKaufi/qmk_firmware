@@ -3,11 +3,13 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
+#include "sendstring_german.h"
 
 /* TAP-DANCE*/
 #ifdef TAP_DANCE_ENABLE
     enum {
-        TD_ESC_AF4
+        TD_ESC_AF4,
+        TD_AP_2AP
         // TD_BSP_ADV
     };
     void escaltf4(tap_dance_state_t *state, void *user_data) {
@@ -20,21 +22,22 @@
         else {
             tap_code(KC_ESC);
         }
+    };
+    void double_apostroph_left(tap_dance_state_t *state, void *user_data) {
+        if (state->count >= 2) {
+            SEND_STRING("''" SS_TAP(X_LEFT));
+            reset_tap_dance(state);
+        }
+        else {
+            register_code(KC_LSFT);
+            tap_code(DE_HASH);
+            unregister_code(KC_LSFT);
+        }
     }
-    // void backspace_worddelete(tap_dance_state_t *state, void *user_data) {
-    //     if (state->count >= 3) {
-    //         register_code(KC_LCTL);
-    //         tap_code(KC_BSPC);
-    //         unregister_code(KC_LCTL);
-    //         reset_tap_dance(state);
-    //     }
-    //     else {
-    //         tap_code(KC_BSPC);
-    //     }
-    // }
+
     tap_dance_action_t tap_dance_actions[] = {
-        [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4)
-        // [TD_BSP_ADV] = ACTION_TAP_DANCE_FN(backspace_worddelete)
+        [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4),
+        [TD_AP_2AP] = ACTION_TAP_DANCE_FN(double_apostroph_left)
     };
 #endif
 
@@ -107,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |CTL|/1\|ALT|    |AGR|<- |Win|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [_1_NAV] = LAYOUT_split_3x6_3( 
+    [_1_NAV] = LAYOUT_split_3x6_3(
         QK_GESC, KC_NO,   KC_NO,   KC_MS_U, KC_NO,   KC_PGUP,
         KC_CAPS, KC_LSFT, KC_MS_L, KC_MS_D, KC_MS_R, KC_HOME,
         QK_LLCK, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
@@ -136,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_LCTL, _______,
         //right
                  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_SHI, DE_HASH,
+                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_SHI, TD_AP_2AP,
         KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  DE_MINS, KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
@@ -178,15 +181,21 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 /* Combo */
 enum combo_events {
     DEL,
+    LEADER,
+    CAPWD,
     DESK_RI,
     DESK_LE,
 };
 #ifdef COMBO_ENABLE
     const uint16_t PROGMEM spc_bspc_del[]  = {SPC1, KC_BSPC, COMBO_END};
+    const uint16_t PROGMEM leader_key[]  = {F_WIN, J_WIN, COMBO_END};
+    const uint16_t PROGMEM caps_word[]  = {A_SHI, OE_SHI, COMBO_END};
     const uint16_t PROGMEM desktop_right[] = {KC_G, DE_H, COMBO_END};
     const uint16_t PROGMEM desktop_left[]  = {KC_B, KC_N, COMBO_END};
     combo_t key_combos[] = {
         [DEL] = COMBO(spc_bspc_del, KC_DEL),
+        [LEADER] = COMBO(leader_key, QK_LEAD),
+        [CAPWD] = COMBO(caps_word, CW_TOGG),
         [DESK_RI] = COMBO_ACTION(desktop_right),
         [DESK_LE] = COMBO_ACTION(desktop_left)
     };
@@ -213,6 +222,24 @@ enum combo_events {
         }
     }
   #endif //Combo
+
+#ifdef LEADER_KEY_ENABLE
+    leader_end_user(void) {
+        if (leader_sequence_one_key(S_ALT)) {
+            SEND_STRING("select top 100 * from ");
+        } else if (leader_sequence_two_keys(S_ALT, S_ALT)) {
+            SEND_STRING("STORNODAT is null ");
+        } else if (leader_sequence_one_key(F_WIN)) {
+            SEND_STING("from ");
+        } else if (leader_sequence_one_key(KC_W)) {
+            SEND_STING("where ");
+        } else if (leader_sequence_one_key(KC_I)) {
+            SEND_STING("inner join ");
+        } else if (leader_sequence_one_key(J_WIN)) {
+            SEND_STING("left join ");
+        }
+    }
+#endif
 
 /* TAP-DANCE */
 #ifdef TAP_DANCE_ENABLE
@@ -545,4 +572,3 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     //     }
     //     return true;
     // }
-     
