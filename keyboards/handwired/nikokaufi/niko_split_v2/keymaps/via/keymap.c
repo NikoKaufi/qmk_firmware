@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_LCTL, _______,
         //right
                  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_SHI, TD_AP_2AP,
+                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_SHI, DE_HASH,
         KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  DE_MINS, KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
@@ -223,20 +223,21 @@ enum combo_events {
     }
   #endif //Combo
 
-#ifdef LEADER_KEY_ENABLE
-    leader_end_user(void) {
-        if (leader_sequence_one_key(S_ALT)) {
+/* LEADER (KEY) */
+#ifdef LEADER_ENABLE
+    void leader_end_userasdasd(void) {
+        if (leader_sequence_one_key(KC_S)) {
             SEND_STRING("select top 100 * from ");
-        } else if (leader_sequence_two_keys(S_ALT, S_ALT)) {
+        } else if (leader_sequence_two_keys(KC_S, KC_S)) {
             SEND_STRING("STORNODAT is null ");
-        } else if (leader_sequence_one_key(F_WIN)) {
-            SEND_STING("from ");
+        } else if (leader_sequence_one_key(KC_F)) {
+            SEND_STRING("from ");
         } else if (leader_sequence_one_key(KC_W)) {
-            SEND_STING("where ");
+            SEND_STRING("where ");
         } else if (leader_sequence_one_key(KC_I)) {
-            SEND_STING("inner join ");
-        } else if (leader_sequence_one_key(J_WIN)) {
-            SEND_STING("left join ");
+            SEND_STRING("inner join ");
+        } else if (leader_sequence_one_key(KC_J)) {
+            SEND_STRING("left join ");
         }
     }
 #endif

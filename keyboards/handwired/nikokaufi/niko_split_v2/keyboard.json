@@ -29,7 +29,7 @@
     "oled": true,
     "wpm": true,
     "layer_lock": true,
-    "leader_key": true,
+    "leader": true,
     "caps_word": true
 },
 "oled": {
@@ -58,8 +58,9 @@
     "layer_count": 4
 },
 "leader_key": {
+    "enabled": true,
     "timing": true,
-    "timeout": 200
+    "timeout": 250
 },
 "layouts": {
     "LAYOUT_split_3x6_3": {
