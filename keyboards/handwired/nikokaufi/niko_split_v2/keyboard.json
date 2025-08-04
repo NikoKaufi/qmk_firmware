@@ -166,7 +166,7 @@
             "activity": true
         },
         "watchdog": true,
-        "watchdog_timeout": 2500
+        "watchdog_timeout": 1500
     },
     "usb_detect": {
         "polling_interval": 10, //default

@@ -292,7 +292,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         //     if (record->event.pressed) {
         //         SEND_STRING(SS_LGUI("r"));
         //         SEND_STRING(SS_DELAY(300));
-        //         SEND_STRING("shutdown /a");
+        //         SEND_STRING("shutdown -a");
         //         SEND_STRING(SS_DELAY(300));
         //         SEND_STRING(SS_TAP(X_ENTER));
         //     }else { /*when keycode is released*/ } break;
