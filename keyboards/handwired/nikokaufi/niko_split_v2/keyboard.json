@@ -60,7 +60,7 @@
 "leader_key": {
     "enabled": true,
     "timing": true,
-    "timeout": 250
+    "timeout": 150
 },
 "layouts": {
     "LAYOUT_split_3x6_3": {

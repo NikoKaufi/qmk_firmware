@@ -1,4 +1,4 @@
-// Copyright 2024 Nikolaj Kaufmann
+// Copyright 2025 Nikolaj Kaufmann
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
@@ -9,8 +9,7 @@
 #ifdef TAP_DANCE_ENABLE
     enum {
         TD_ESC_AF4,
-        TD_AP_2AP
-        // TD_BSP_ADV
+        TD_HASH_AP
     };
     void escaltf4(tap_dance_state_t *state, void *user_data) {
         if (state->count >= 3) {
@@ -29,15 +28,13 @@
             reset_tap_dance(state);
         }
         else {
-            register_code(KC_LSFT);
             tap_code(DE_HASH);
-            unregister_code(KC_LSFT);
         }
-    }
+    };
 
     tap_dance_action_t tap_dance_actions[] = {
         [TD_ESC_AF4] = ACTION_TAP_DANCE_FN(escaltf4),
-        [TD_AP_2AP] = ACTION_TAP_DANCE_FN(double_apostroph_left)
+        [TD_HASH_AP] = ACTION_TAP_DANCE_FN(double_apostroph_left)
     };
 #endif
 
@@ -54,7 +51,7 @@ enum custom_keycodes {
 #define ALT2 LT(2,KC_LALT)
 #define ENT3 LT(3,KC_ENT)
 #define ESC_AF4 TD(TD_ESC_AF4)
-#define BSP_ADV TD(TD_BSP_ADV)
+#define HASH_AP TD(TD_HASH_AP)
     // home row mods
 #define A_SHI (LSFT_T(KC_A))
 #define S_ALT (LALT_T(KC_S))
@@ -139,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_LCTL, _______,
         //right
                  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_SHI, DE_HASH,
+                 KC_6,    KC_7,    KC_8,    KC_9,    ZER_SHI, HASH_AP,
         KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  DE_MINS, KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
@@ -225,9 +222,11 @@ enum combo_events {
 
 /* LEADER (KEY) */
 #ifdef LEADER_ENABLE
-    void leader_end_userasdasd(void) {
-        if (leader_sequence_one_key(KC_S)) {
+    void leader_end_user(void) {
+        if (leader_sequence_one_key(KC_A)) {
             SEND_STRING("select top 100 * from ");
+        } else if (leader_sequence_one_key(KC_S)) {
+            SEND_STRING("select ");
         } else if (leader_sequence_two_keys(KC_S, KC_S)) {
             SEND_STRING("STORNODAT is null ");
         } else if (leader_sequence_one_key(KC_F)) {
@@ -281,22 +280,22 @@ enum combo_events {
 int oled_helligkeit = 128;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case OFF: //Herunterfahren
-            if (record->event.pressed) {
-                SEND_STRING(SS_LGUI("r"));
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING("shutdown /s /t 10 /f /c @Herunterfahren in 10 Sekunden@");
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING(SS_TAP(X_ENTER));
-            }else { /*when keycode is released*/ } break;
-        case STP: //Herunterfahren abbrechen
-            if (record->event.pressed) {
-                SEND_STRING(SS_LGUI("r"));
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING("shutdown /a");
-                SEND_STRING(SS_DELAY(300));
-                SEND_STRING(SS_TAP(X_ENTER));
-            }else { /*when keycode is released*/ } break;
+        // case OFF: //Herunterfahren
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LGUI("r"));
+        //         SEND_STRING(SS_DELAY(300));
+        //         SEND_STRING("shutdown -s -t 10 -f -c "Herunterfahren in 10 Sekunden!"");
+        //         SEND_STRING(SS_DELAY(300));
+        //         SEND_STRING(SS_TAP(X_ENTER));
+        //     }else { /*when keycode is released*/ } break;
+        // case STP: //Herunterfahren abbrechen
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LGUI("r"));
+        //         SEND_STRING(SS_DELAY(300));
+        //         SEND_STRING("shutdown /a");
+        //         SEND_STRING(SS_DELAY(300));
+        //         SEND_STRING(SS_TAP(X_ENTER));
+        //     }else { /*when keycode is released*/ } break;
         #ifdef OLED_ENABLE
             case O_ON:
                 if (record->event.pressed) {
