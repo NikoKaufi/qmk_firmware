@@ -55,7 +55,7 @@
     // }
 },
 "dynamic_keymap": {
-    "layer_count": 4
+    "layer_count": 5
 },
 "leader_key": {
     "enabled": true,
@@ -166,11 +166,11 @@
             "activity": true
         },
         "watchdog": true,
-        "watchdog_timeout": 1500
+        "watchdog_timeout": 2000
     },
     "usb_detect": {
         "polling_interval": 10, //default
-        "timeout": 2000         //default
+        "timeout": 1500         //default: 1500
     }
 },
 "ws2812": {

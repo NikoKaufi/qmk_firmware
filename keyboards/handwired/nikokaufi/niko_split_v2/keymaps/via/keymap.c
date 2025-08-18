@@ -61,16 +61,26 @@ enum custom_keycodes {
 #define K_STRG (RCTL_T(KC_K))
 #define L_ALT (RALT_T(KC_L))
 #define OE_SHI (RSFT_T(DE_ODIA))
+    // for NEO
+#define H_WIN (LWIN_T(KC_H))
+#define I_ALT (LALT_T(KC_I))
+#define E_STRG (LCTL_T(KC_E))
+// #define A_SHI
+#define T_SHI (RSFT(KC_T))
+#define R_STRG (RCTL_T(KC_R))
+#define N_ALT (RALT(KC_N))
+#define S_WIN (RWIN_T(KC_S))
 
 #define ONE_SHI (LSFT_T(KC_1))
 #define ZER_SHI (RSFT_T(DE_0))
 
 /* LAYER NAMES */
 enum layer_names {
-    _0_ALPHA,
+    _0_QUERTZ,
     _1_NAV,
     _2_NUM,
     _3_RGB,
+    _4_NEO
 };
 /* KEYMAP */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -85,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |CTL|SPC|ALT|    |AGR|<- |ENT|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [_0_ALPHA] = LAYOUT_split_3x6_3(
+    [_0_QUERTZ] = LAYOUT_split_3x6_3(
         ESC_AF4, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,
         KC_TAB,  A_SHI,   S_ALT,   D_STRG,  F_WIN,   KC_G,
         DE_LABK, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,
@@ -161,17 +171,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_NO,   KC_NO,   O_OFF,   O_BDN,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   _______
-        )
+        ),
+    /*  [4]
+     * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
+     * │   │ K │ U │ Ü │ . │ Ä |            | V | G | C | L | J | F |
+     * ├───┼───┼───┼───┼───┼───┤            |───┼───┼───┼───┼───┼───┤
+     * │   │ H │ I │ E │ A │ O |            | D | T | R | N | S | ß |
+     * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
+     * │   │ X │ Y │ Ö │ , | Q |MUT|    |PLP| B | P | W | M | Z | - |
+     * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
+     *                 |CTL|SPC|ALT|    |AGR|<- |ENT|
+     *                 └───┴───┴───┘    └───┴───┴───┘
+     */
+    [_4_NEO] = LAYOUT_split_3x6_3(
+        ESC_AF4, KC_K,    KC_U,    DE_UDIA, KC_DOT,  DE_ADIA,
+        KC_TAB,  H_WIN,   I_ALT,   E_STRG,  A_SHI,   KC_O,
+        DE_LABK, KC_X,    KC_Y,    DE_ODIA, KC_COMM, KC_Q,    KC_MUTE,
+                                            KC_LCTL, SPC1,    ALT2,
+        //right
+                 KC_V,    KC_G,    KC_C,    KC_L,    KC_J,    KC_F,
+                 KC_D,    T_SHI,   R_STRG,  N_ALT,   S_WIN,   DE_SS,
+        KC_MPLY, KC_B,    KC_P,    KC_W,    KC_W,    KC_M,    KC_MINS,
+        KC_RALT, KC_BSPC, ENT3
+    )
 
 };
 
 /* ENCODER */
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_0_ALPHA] = {ENCODER_CCW_CW(KC_VOLD,  KC_VOLU),   ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
-    [_1_NAV] =   {ENCODER_CCW_CW(KC_WH_L,  KC_WH_R),   ENCODER_CCW_CW(KC_WH_U, KC_WH_D)},
-    [_2_NUM] =   {ENCODER_CCW_CW(KC_NO,    KC_NO),     ENCODER_CCW_CW(KC_NO,   KC_NO)},
-    [_3_RGB] =   {ENCODER_CCW_CW(RM_PREV,  RM_NEXT),   ENCODER_CCW_CW(KC_NO,   KC_NO)}
+    [_0_QUERTZ] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU),   ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
+    [_1_NAV] =    {ENCODER_CCW_CW(KC_WH_L,  KC_WH_R),  ENCODER_CCW_CW(KC_WH_U, KC_WH_D)},
+    [_2_NUM] =    {ENCODER_CCW_CW(KC_NO,    KC_NO),    ENCODER_CCW_CW(KC_NO,   KC_NO)},
+    [_3_RGB] =    {ENCODER_CCW_CW(RM_PREV,  RM_NEXT),  ENCODER_CCW_CW(KC_NO,   KC_NO)},
+    [_4_NEO] =    {ENCODER_CCW_CW(KC_VOLD,  KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)}
     };
 #endif //ENCODER_MAP
 

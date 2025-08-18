@@ -124,7 +124,7 @@ static void print_left(void) {
 
     // oled_set_cursor(0, 3);
     // switch (get_highest_layer(default_layer_state)) {
-    //     case _0_ALPHA:
+    //     case _0_QUERTZ:
     //         oled_write("QWRTZ", false);
     //         break;
     //     case _1_NAV:
@@ -140,8 +140,8 @@ static void print_left(void) {
     /* Print current layer */
     oled_set_cursor(0, 6);
     switch (get_highest_layer(layer_state)) {
-        case _0_ALPHA:
-            oled_write("Alpha", false);
+        case _0_QUERTZ:
+            oled_write("Qwrtz", false);
             break;
         case _1_NAV:
             oled_write("Navig", false);
@@ -151,6 +151,9 @@ static void print_left(void) {
             break;
         case _3_RGB:
             oled_write("R-G-B", false);
+            break;
+        case _4_NEO:
+            oled_write("N-E-O", false);
             break;
         default:
             oled_write("Undef", false);
