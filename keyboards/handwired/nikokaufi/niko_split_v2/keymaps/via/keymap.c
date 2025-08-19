@@ -47,9 +47,9 @@ enum custom_keycodes {
     O_BUP,
     O_BDN
 };
-#define SPC1 LT(1,KC_SPACE)
-#define ALT2 LT(2,KC_LALT)
-#define ENT3 LT(3,KC_ENT)
+#define SPC2 LT(2,KC_SPACE)
+#define ALT3 LT(3,KC_LALT)
+#define ENT4 LT(4,KC_ENT)
 #define ESC_AF4 TD(TD_ESC_AF4)
 #define HASH_AP TD(TD_HASH_AP)
     // home row mods
@@ -66,9 +66,9 @@ enum custom_keycodes {
 #define I_ALT (LALT_T(KC_I))
 #define E_STRG (LCTL_T(KC_E))
 // #define A_SHI
-#define T_SHI (RSFT(KC_T))
+#define T_SHI (RSFT_T(KC_T))
 #define R_STRG (RCTL_T(KC_R))
-#define N_ALT (RALT(KC_N))
+#define N_ALT (RALT_T(KC_N))
 #define S_WIN (RWIN_T(KC_S))
 
 #define ONE_SHI (LSFT_T(KC_1))
@@ -77,10 +77,11 @@ enum custom_keycodes {
 /* LAYER NAMES */
 enum layer_names {
     _0_QUERTZ,
-    _1_NAV,
-    _2_NUM,
-    _3_RGB,
-    _4_NEO
+    _1_NEO,
+    _2_NAV,
+    _3_NUM,
+    _4_RGB
+
 };
 /* KEYMAP */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -98,15 +99,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_0_QUERTZ] = LAYOUT_split_3x6_3(
         ESC_AF4, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,
         KC_TAB,  A_SHI,   S_ALT,   D_STRG,  F_WIN,   KC_G,
-        DE_LABK, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,
-                                            KC_LCTL, SPC1,    ALT2,
+        DE_LABK, DE_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,
+                                            KC_LCTL, SPC2,    ALT3,
         //right
-                 KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_UDIA,
+                 DE_Z,    KC_U,    KC_I,    KC_O,    KC_P,    DE_UDIA,
                  KC_H,    J_WIN,   K_STRG,  L_ALT,   OE_SHI,  DE_ADIA,
         KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT,  DE_MINS, DE_SS,
-        KC_RALT, KC_BSPC, ENT3
+        KC_RALT, KC_BSPC, ENT4
         ),
     /*  [1]
+     * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
+     * │ESC│ K │ U │ Ü │ . │ Ä |            | V | G | C | L | J | F |
+     * ├───┼───┼───┼───┼───┼───┤            |───┼───┼───┼───┼───┼───┤
+     * │TAB│ H │ I │ E │ A │ O |            | D | T | R | N | S | ß |
+     * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
+     * │ < │ X │ Y │ Ö │ , | Q |MUT|    |PLP| B | P | W | M | Z | - |
+     * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
+     *                 |CTL|SPC|ALT|    |AGR|<- |ENT|
+     *                 └───┴───┴───┘    └───┴───┴───┘
+     */
+    [_1_NEO] = LAYOUT_split_3x6_3(
+        ESC_AF4, KC_K,    KC_U,    DE_UDIA, KC_DOT,  DE_ADIA,
+        KC_TAB,  H_WIN,   I_ALT,   E_STRG,  A_SHI,   KC_O,
+        DE_LABK, KC_X,    DE_Y,    DE_ODIA, KC_COMM, KC_Q,    KC_MUTE,
+                                            KC_LCTL, SPC2,    ALT3,
+        //right
+                 KC_V,    KC_G,    KC_C,    KC_L,    KC_J,    KC_F,
+                 KC_D,    T_SHI,   R_STRG,  N_ALT,   S_WIN,   DE_SS,
+        KC_MPLY, KC_B,    KC_P,    KC_W,    KC_M,    DE_Z,    DE_MINS,
+        KC_RALT, KC_BSPC, ENT4
+    ),
+    /*  [2]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
      * │GES│   │   │MS↑│   │PgU|            |PgD|   | ↑ |   |   |+*~|
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
@@ -117,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |CTL|/1\|ALT|    |AGR|<- |Win|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [_1_NAV] = LAYOUT_split_3x6_3(
+    [_2_NAV] = LAYOUT_split_3x6_3(
         QK_GESC, KC_NO,   KC_NO,   KC_MS_U, KC_NO,   KC_PGUP,
         KC_CAPS, KC_LSFT, KC_MS_L, KC_MS_D, KC_MS_R, KC_HOME,
         QK_LLCK, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
@@ -128,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_BTN2, NK_TOGG, KC_NO,   KC_BTN2, KC_NO,   KC_NO,   KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
-    /*  [2]
+    /*  [3]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
      * |F12│F1 │F2 │F3 │F4 │F5 │            |F6 |F7 |F8 |F9 |F10|F11|
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
@@ -139,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |   |CTL|/2\|    |AGR|<- |Win|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [_2_NUM] = LAYOUT_split_3x6_3(
+    [_3_NUM] = LAYOUT_split_3x6_3(
         KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,
         KC_TAB,  ONE_SHI, KC_2,    KC_3,    KC_4,    KC_5,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
@@ -150,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_NO,   KC_NO,   KC_COMM, KC_DOT,  DE_MINS, KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
-    /*  [3]
+    /*  [4]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
      * │TOG│MOU│VAU│HUU│SAU│SPU|            |   |   |OOF|OBU|   |   |
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
@@ -161,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |STP|OFF|   |    |   |   |/3\|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [_3_RGB] = LAYOUT_split_3x6_3(
+    [_4_RGB] = LAYOUT_split_3x6_3(
         RM_TOGG, RM_NEXT, RM_VALU, RM_HUEU, RM_SATU, RM_SPDU,
         KC_NO,   RM_PREV, RM_VALD, RM_HUED, RM_SATD, RM_SPDD,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RM_TOGG,
@@ -171,40 +194,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_NO,   KC_NO,   O_OFF,   O_BDN,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   _______
-        ),
-    /*  [4]
-     * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-     * │   │ K │ U │ Ü │ . │ Ä |            | V | G | C | L | J | F |
-     * ├───┼───┼───┼───┼───┼───┤            |───┼───┼───┼───┼───┼───┤
-     * │   │ H │ I │ E │ A │ O |            | D | T | R | N | S | ß |
-     * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
-     * │   │ X │ Y │ Ö │ , | Q |MUT|    |PLP| B | P | W | M | Z | - |
-     * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
-     *                 |CTL|SPC|ALT|    |AGR|<- |ENT|
-     *                 └───┴───┴───┘    └───┴───┴───┘
-     */
-    [_4_NEO] = LAYOUT_split_3x6_3(
-        ESC_AF4, KC_K,    KC_U,    DE_UDIA, KC_DOT,  DE_ADIA,
-        KC_TAB,  H_WIN,   I_ALT,   E_STRG,  A_SHI,   KC_O,
-        DE_LABK, KC_X,    KC_Y,    DE_ODIA, KC_COMM, KC_Q,    KC_MUTE,
-                                            KC_LCTL, SPC1,    ALT2,
-        //right
-                 KC_V,    KC_G,    KC_C,    KC_L,    KC_J,    KC_F,
-                 KC_D,    T_SHI,   R_STRG,  N_ALT,   S_WIN,   DE_SS,
-        KC_MPLY, KC_B,    KC_P,    KC_W,    KC_W,    KC_M,    KC_MINS,
-        KC_RALT, KC_BSPC, ENT3
-    )
-
+        )
 };
 
 /* ENCODER */
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_0_QUERTZ] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU),   ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
-    [_1_NAV] =    {ENCODER_CCW_CW(KC_WH_L,  KC_WH_R),  ENCODER_CCW_CW(KC_WH_U, KC_WH_D)},
-    [_2_NUM] =    {ENCODER_CCW_CW(KC_NO,    KC_NO),    ENCODER_CCW_CW(KC_NO,   KC_NO)},
-    [_3_RGB] =    {ENCODER_CCW_CW(RM_PREV,  RM_NEXT),  ENCODER_CCW_CW(KC_NO,   KC_NO)},
-    [_4_NEO] =    {ENCODER_CCW_CW(KC_VOLD,  KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)}
+    [_1_NEO] =    {ENCODER_CCW_CW(KC_VOLD,  KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
+    [_2_NAV] =    {ENCODER_CCW_CW(KC_WH_L,  KC_WH_R),  ENCODER_CCW_CW(KC_WH_U, KC_WH_D)},
+    [_3_NUM] =    {ENCODER_CCW_CW(KC_NO,    KC_NO),    ENCODER_CCW_CW(KC_NO,   KC_NO)},
+    [_4_RGB] =    {ENCODER_CCW_CW(RM_PREV,  RM_NEXT),  ENCODER_CCW_CW(KC_NO,   KC_NO)}
     };
 #endif //ENCODER_MAP
 
@@ -215,19 +215,25 @@ enum combo_events {
     CAPWD,
     DESK_RI,
     DESK_LE,
+    NEO_ON,
+    NEO_OFF,
 };
 #ifdef COMBO_ENABLE
-    const uint16_t PROGMEM spc_bspc_del[]  = {SPC1, KC_BSPC, COMBO_END};
-    const uint16_t PROGMEM leader_key[]  = {F_WIN, J_WIN, COMBO_END};
-    const uint16_t PROGMEM caps_word[]  = {A_SHI, OE_SHI, COMBO_END};
-    const uint16_t PROGMEM desktop_right[] = {KC_G, DE_H, COMBO_END};
-    const uint16_t PROGMEM desktop_left[]  = {KC_B, KC_N, COMBO_END};
+    const uint16_t PROGMEM spc_bspc_del[]  = {SPC2,    KC_BSPC, COMBO_END};
+    const uint16_t PROGMEM leader_key[]    = {F_WIN,   J_WIN,   COMBO_END};
+    const uint16_t PROGMEM caps_word[]     = {A_SHI,   OE_SHI,  COMBO_END};
+    const uint16_t PROGMEM desktop_right[] = {KC_G,    DE_H,    COMBO_END};
+    const uint16_t PROGMEM desktop_left[]  = {KC_B,    KC_N,    COMBO_END};
+    const uint16_t PROGMEM neo_on[]        = {ESC_AF4, DE_UDIA, COMBO_END};
+    const uint16_t PROGMEM neo_off[]       = {ESC_AF4, KC_F,    COMBO_END};
     combo_t key_combos[] = {
         [DEL] = COMBO(spc_bspc_del, KC_DEL),
-        [LEADER] = COMBO(leader_key, QK_LEAD),
-        [CAPWD] = COMBO(caps_word, CW_TOGG),
+        [LEADER]  = COMBO(leader_key, QK_LEAD),
+        [CAPWD]   = COMBO(caps_word, CW_TOGG),
         [DESK_RI] = COMBO_ACTION(desktop_right),
-        [DESK_LE] = COMBO_ACTION(desktop_left)
+        [DESK_LE] = COMBO_ACTION(desktop_left),
+        [NEO_ON]  = COMBO(neo_on, DF(1)),
+        [NEO_OFF] = COMBO(neo_off, DF(0))
     };
     void process_combo_event(uint16_t combo_index, bool pressed) {
         switch(combo_index) {
@@ -297,7 +303,7 @@ enum combo_events {
             case L_ALT: return true;
             case D_STRG: return true;
             case K_STRG: return true;
-            case SPC1: return true;
+            case SPC2: return true;
             case ONE_SHI: return true;
             case ZER_SHI: return true;
             default: return false;
@@ -310,66 +316,68 @@ enum combo_events {
 #endif //OLED
 
 /* MACROS */
-int oled_helligkeit = 128;
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        // case OFF: //Herunterfahren
-        //     if (record->event.pressed) {
-        //         SEND_STRING(SS_LGUI("r"));
-        //         SEND_STRING(SS_DELAY(300));
-        //         SEND_STRING("shutdown -s -t 10 -f -c "Herunterfahren in 10 Sekunden!"");
-        //         SEND_STRING(SS_DELAY(300));
-        //         SEND_STRING(SS_TAP(X_ENTER));
-        //     }else { /*when keycode is released*/ } break;
-        // case STP: //Herunterfahren abbrechen
-        //     if (record->event.pressed) {
-        //         SEND_STRING(SS_LGUI("r"));
-        //         SEND_STRING(SS_DELAY(300));
-        //         SEND_STRING("shutdown -a");
-        //         SEND_STRING(SS_DELAY(300));
-        //         SEND_STRING(SS_TAP(X_ENTER));
-        //     }else { /*when keycode is released*/ } break;
-        #ifdef OLED_ENABLE
-            case O_ON:
-                if (record->event.pressed) {
-                    oledstatus = 1;
-                }else { /*when keycode is released*/ } break;
-            case O_OFF:
-                if (record->event.pressed) {
-                    oledstatus = 0;
-                }else { /*when keycode is released*/ } break;
-            case O_BUP:
-                if (record->event.pressed) {
-                    oled_helligkeit = oled_helligkeit + 16;
-                    oled_set_brightness(oled_helligkeit);
-                }else { /*when keycode is released*/ } break;
-            case O_BDN:
-                if (record->event.pressed) {
-                    oled_helligkeit = oled_helligkeit - 16;
-                    oled_set_brightness(oled_helligkeit);
-                }else { /*when keycode is released*/ } break;
+#ifdef OLED_ENABLE
+    int oled_helligkeit = 128;
+    bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+        switch (keycode) {
+            // case OFF: //Herunterfahren
+            //     if (record->event.pressed) {
+            //         SEND_STRING(SS_LGUI("r"));
+            //         SEND_STRING(SS_DELAY(300));
+            //         SEND_STRING("shutdown -s -t 10 -f -c "Herunterfahren in 10 Sekunden!"");
+            //         SEND_STRING(SS_DELAY(300));
+            //         SEND_STRING(SS_TAP(X_ENTER));
+            //     }else { /*when keycode is released*/ } break;
+            // case STP: //Herunterfahren abbrechen
+            //     if (record->event.pressed) {
+            //         SEND_STRING(SS_LGUI("r"));
+            //         SEND_STRING(SS_DELAY(300));
+            //         SEND_STRING("shutdown -a");
+            //         SEND_STRING(SS_DELAY(300));
+            //         SEND_STRING(SS_TAP(X_ENTER));
+            //     }else { /*when keycode is released*/ } break;
 
-            //KEYBOARD PET Sneak/Jump
-            case KC_LCTL:
-            case KC_RCTL:
-                if (record->event.pressed) {
-                    isSneaking = true;
-                } else {
-                    isSneaking = false;
-                }
-                break;
-            case SPC1:
-                if (record->event.pressed) {
-                    isJumping  = true;
-                    showedJump = false;
-                } else {
-                    isJumping = false;
-                }
-                break;      //KEYBOARD PET STATUS END
-        #endif //OLED
-    }
-    return true;
-}; //ENDE MACROS
+                case O_ON:
+                    if (record->event.pressed) {
+                        oledstatus = 1;
+                    }else { /*when keycode is released*/ } break;
+                case O_OFF:
+                    if (record->event.pressed) {
+                        oledstatus = 0;
+                    }else { /*when keycode is released*/ } break;
+                case O_BUP:
+                    if (record->event.pressed) {
+                        oled_helligkeit = oled_helligkeit + 16;
+                        oled_set_brightness(oled_helligkeit);
+                    }else { /*when keycode is released*/ } break;
+                case O_BDN:
+                    if (record->event.pressed) {
+                        oled_helligkeit = oled_helligkeit - 16;
+                        oled_set_brightness(oled_helligkeit);
+                    }else { /*when keycode is released*/ } break;
+
+                //KEYBOARD PET Sneak/Jump
+                case KC_LCTL:
+                case KC_RCTL:
+                    if (record->event.pressed) {
+                        isSneaking = true;
+                    } else {
+                        isSneaking = false;
+                    }
+                    break;
+                case SPC2:
+                    if (record->event.pressed) {
+                        isJumping  = true;
+                        showedJump = false;
+                    } else {
+                        isJumping = false;
+                    }
+                    break;      //KEYBOARD PET STATUS END
+
+        }
+        return true;
+    }; //ENDE MACROS
+#endif //OLED
 
 //RGB on active keys
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -388,10 +396,10 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
         const int led_index = 8; // 8 = ESC
             switch(get_highest_layer(layer_state)) {
-                case 1:
+                case 2:
                     rgb_matrix_set_color(led_index, RGB_BLUE);
                     break;
-                case 2:
+                case 3:
                     rgb_matrix_set_color(led_index, RGB_RED);
                     break;
                 default:
@@ -400,7 +408,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
     return false;
 };
-
 
 
 
