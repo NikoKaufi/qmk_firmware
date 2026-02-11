@@ -38,7 +38,7 @@
 },
 "diode_direction": "COL2ROW",
 "matrix_pins": {
-    "rows": ["GP0", "GP5", "GP6", "GP8"],
+    "rows": ["GP0", "GP5", "GP6", "GP7"], //row.3: default: GP8, ruth: GP7
     "cols": ["GP29", "GP2", "GP28", "GP3", "GP22", "GP4", "GP9"]
 },
 "bootmagic": {
@@ -134,7 +134,7 @@
     "matrix_pins": {
         "right": {
             "rows": ["GP0", "GP26", "GP21", "GP23"],
-            "cols": ["GP8", "GP29", "GP4", "GP27", "GP3", "GP28", "GP2"]
+            "cols": ["GP20", "GP29", "GP4", "GP27", "GP3", "GP28", "GP2"]  //col.0: default:GP8, ruth: GP20
         }
     },
     "bootmagic": {

@@ -40,39 +40,40 @@
 
 /* CUSTOM KEYCODES */
 enum custom_keycodes {
-    OFF = SAFE_RANGE,
-    STP,
-    O_ON,
+        // OLED Keycodes
+    O_ON = QK_USER_0,
     O_OFF,
     O_BUP,
-    O_BDN
+    O_BDN,
+        // Umwandlung der #defines in Custom Keycodes
+    SPC2,       // #define SPC2 LT(2,KC_SPACE)
+    ALT3,       // #define ALT3 LT(3,KC_LALT)
+    ENT4,       // #define ENT4 LT(4,KC_ENT)
+        // Homerow Mods
+    A_SHI,      // #define A_SHI (LSFT_T(KC_A))
+    S_ALT,      // #define S_ALT (LALT_T(KC_S))
+    D_STRG,     // #define D_STRG (LCTL_T(KC_D))
+    F_WIN,      // #define F_WIN (LWIN_T(KC_F))
+    J_WIN,      // #define J_WIN (RWIN_T(KC_J))
+    K_STRG,     // #define K_STRG (RCTL_T(KC_K))
+    L_ALT,      // #define L_ALT (RALT_T(KC_L))
+    OE_SHI,     // #define OE_SHI (RSFT_T(DE_ODIA))
+    ONE_SHI,    // #define ONE_SHI (LSFT_T(KC_1))
+    ZER_SHI,    // #define ZER_SHI (RSFT_T(DE_0))
+        // for NEO
+    H_WIN,      // #define H_WIN (LWIN_T(KC_H))
+    I_ALT,      // #define I_ALT (LALT_T(KC_I))
+    E_STRG,     // #define E_STRG (LCTL_T(KC_E))
+                // #define A_SHI
+    T_SHI,      // #define T_SHI (RSFT_T(KC_T))
+    R_STRG,     // #define R_STRG (RCTL_T(KC_R))
+    N_ALT,      // #define N_ALT (RALT_T(KC_N))
+    S_WIN,      // #define S_WIN (RWIN_T(KC_S))
+        // TAP-Dance
+    ESC_AF4,    // #define ESC_AF4 TD(TD_ESC_AF4)
+    HASH_AP     // #define HASH_AP TD(TD_HASH_AP)
 };
-#define SPC2 LT(2,KC_SPACE)
-#define ALT3 LT(3,KC_LALT)
-#define ENT4 LT(4,KC_ENT)
-#define ESC_AF4 TD(TD_ESC_AF4)
-#define HASH_AP TD(TD_HASH_AP)
-    // home row mods
-#define A_SHI (LSFT_T(KC_A))
-#define S_ALT (LALT_T(KC_S))
-#define D_STRG (LCTL_T(KC_D))
-#define F_WIN (LWIN_T(KC_F))
-#define J_WIN (RWIN_T(KC_J))
-#define K_STRG (RCTL_T(KC_K))
-#define L_ALT (RALT_T(KC_L))
-#define OE_SHI (RSFT_T(DE_ODIA))
-    // for NEO
-#define H_WIN (LWIN_T(KC_H))
-#define I_ALT (LALT_T(KC_I))
-#define E_STRG (LCTL_T(KC_E))
-// #define A_SHI
-#define T_SHI (RSFT_T(KC_T))
-#define R_STRG (RCTL_T(KC_R))
-#define N_ALT (RALT_T(KC_N))
-#define S_WIN (RWIN_T(KC_S))
 
-#define ONE_SHI (LSFT_T(KC_1))
-#define ZER_SHI (RSFT_T(DE_0))
 
 /* LAYER NAMES */
 enum layer_names {
@@ -81,7 +82,6 @@ enum layer_names {
     _2_NAV,
     _3_NUM,
     _4_RGB
-
 };
 /* KEYMAP */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RM_TOGG, RM_NEXT, RM_VALU, RM_HUEU, RM_SATU, RM_SPDU,
         KC_NO,   RM_PREV, RM_VALD, RM_HUED, RM_SATD, RM_SPDD,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RM_TOGG,
-                                            STP,     OFF,     KC_NO,
+                                            KC_NO,   KC_NO,     KC_NO,
         //right
                  KC_NO,   KC_NO,   O_ON,    O_BUP,   KC_NO,   KC_NO,
                  KC_NO,   KC_NO,   O_OFF,   O_BDN,   KC_NO,   KC_NO,
@@ -312,7 +312,7 @@ enum combo_events {
 #endif //TAP_DANCE
 
 #ifdef OLED_ENABLE
-    #include "OLED.c"
+    #include "OLED_nk.c"
 #endif //OLED
 
 /* MACROS */
@@ -356,6 +356,47 @@ enum combo_events {
                         oled_set_brightness(oled_helligkeit);
                     }else { /*when keycode is released*/ } break;
 
+
+
+                case SPC2:
+                    if (record->event.pressed) {
+                        isJumping  = true;
+                        showedJump = false;
+                    } else {
+                        isJumping = false;
+                    }
+                    return process_layer_tap(LT(2,KC_SPACE), record);
+                case ALT3:
+                    return process_layer_tap(LT(3,KC_LALT), record);
+                case ENT4:
+                    return process_layer_tap(LT(4,KC_ENT), record);
+
+                // Tap-Dance Keycodes
+                case ESC_AF4:
+                    return process_tap_dance(TD(TD_ESC_AF4), record);
+
+                // Homerow Mods
+                case A_SHI:
+                    return process_mod_tap(LSFT_T(KC_A), record);
+                case S_ALT:
+                    return process_mod_tap(LALT_T(KC_S), record);
+                case D_STRG:
+                    return process_mod_tap(LCTL_T(KC_D), record);
+                case F_WIN:
+                    return process_mod_tap(LWIN_T(KC_F), record);
+                case J_WIN:
+                    return process_mod_tap(RWIN_T(KC_J), record);
+                case K_STRG:
+                    return process_mod_tap(RCTL_T(KC_K), record);
+                case L_ALT:
+                    return process_mod_tap(RALT_T(KC_L), record);
+                case OE_SHI:
+                    return process_mod_tap(RSFT_T(DE_ODIA), record);
+                case ONE_SHI:
+                    return process_mod_tap(LSFT_T(KC_1), record);
+                case ZER_SHI:
+                    return process_mod_tap(RSFT_T(DE_0), record);
+
                 //KEYBOARD PET Sneak/Jump
                 case KC_LCTL:
                 case KC_RCTL:
@@ -365,14 +406,7 @@ enum combo_events {
                         isSneaking = false;
                     }
                     break;
-                case SPC2:
-                    if (record->event.pressed) {
-                        isJumping  = true;
-                        showedJump = false;
-                    } else {
-                        isJumping = false;
-                    }
-                    break;      //KEYBOARD PET STATUS END
+                //KEYBOARD PET STATUS END
 
         }
         return true;

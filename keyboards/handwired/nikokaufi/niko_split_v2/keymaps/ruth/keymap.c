@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 |CTL|/1\|ALT|    |AGR|<- |Win|
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
-    [_1_NAV] = LAYOUT_split_3x6_3( 
+    [_1_NAV] = LAYOUT_split_3x6_3(
         QK_GESC, KC_NO,   KC_NO,   KC_MS_U, KC_NO,   KC_PGUP,
         KC_CAPS, KC_LSFT, KC_MS_L, KC_MS_D, KC_MS_R, KC_HOME,
         QK_LLCK, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
@@ -165,15 +165,18 @@ enum combo_events {
   DEL,
   DESK_RI,
   DESK_LE,
+  CAPWD,
 };
 #ifdef COMBO_ENABLE
-    const uint16_t PROGMEM spc_bspc_del[]  = {SPC1, KC_BSPC, COMBO_END};
-    const uint16_t PROGMEM desktop_right[] = {KC_T, DE_Z, COMBO_END};
-    const uint16_t PROGMEM desktop_left[]  = {KC_G, KC_H, COMBO_END};
+    const uint16_t PROGMEM spc_bspc_del[]  = {SPC1,  KC_BSPC, COMBO_END};
+    const uint16_t PROGMEM desktop_right[] = {KC_T,  DE_Z,    COMBO_END};
+    const uint16_t PROGMEM desktop_left[]  = {KC_G,  KC_H,    COMBO_END};
+    const uint16_t PROGMEM caps_word[]     = {A_SHI, OE_SHI,  COMBO_END};
     combo_t key_combos[] = {
         [DEL] = COMBO(spc_bspc_del, KC_DEL),
         [DESK_RI] = COMBO_ACTION(desktop_right),
-        [DESK_LE] = COMBO_ACTION(desktop_left)
+        [DESK_LE] = COMBO_ACTION(desktop_left),
+        [CAPWD]   = COMBO(caps_word, CW_TOGG)
     };
     void process_combo_event(uint16_t combo_index, bool pressed) {
         switch(combo_index) {

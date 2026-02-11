@@ -1,0 +1,123 @@
+{
+    "name": "niko_split_v2",
+    "vendorId": "0x4E4B",
+    "productId": "0x0001",
+    "keycodes": ["qmk_lighting"],
+    "matrix": {"rows": 8, "cols": 7},
+    "layouts": {
+        "keymap": [
+            [{"c":"#777777"},"0,0",         {"y":-0.1,"c":"cccccc"},"0,1", {"y":-0.5},"0,2",  {"y":-0.5},"0,3",  {"y":0.25},"0,4",           {"y":0.05},"0,5"],
+            [{"y":0.8,"c":"#aaaaaa"},"1,0", {"y":-0.1,"c":"cccccc"},"1,1", {"y":-0.5},"1,2",  {"y":-0.5},"1,3",  {"y":0.25},"1,4",           {"y":0.05},"1,5"],
+            [{"y":0.8,"c":"#aaaaaa"},"2,0", {"y":-0.1,"c":"cccccc"},"2,1", {"y":-0.5},"2,2",  {"y":-0.5},"2,3",  {"y":0.25},"2,4",           {"y":0.05},"2,5",    {"y":0.25,"x":0.1,"c":"#777777"},"2,6\n\n\n\n\n\n\n\n\ne0"],
+                [{"y":-0.3,"x":4,"c":"#aaaaaa"},"3,4",  {"y":0.25},"3,5",   {"y":0.25},"3,6"],
+
+                    [{"y":-4.45,"x":10,"c":"cccccc"},"4,1",                                                           {"y":-0.05},"4,2",     {"y":-0.25},"4,3",  {"y":0.5},"4,4",  {"y":0.5},"4,5",   {"y":0.1,"c":"#777777"},"4,6"],
+                    [{"y":-0.8,"x":10,"c":"cccccc"},"5,1",                                                            {"y":-0.05},"5,2",     {"y":-0.25},"5,3",  {"y":0.5},"5,4",  {"y":0.5},"5,5",   {"y":0.1,"c":"#aaaaaa"},"5,6"],
+                [{"y":-0.55,"x":8.9,"c":"#777777"},"6,0\n\n\n\n\n\n\n\n\ne1", {"y":-0.25,"x":0.1,"c":"cccccc"},"6,1", {"y":-0.05},"6,2",     {"y":-0.25},"6,3",  {"y":0.5},"6,4",  {"y":0.5},"6,5",   {"y":0.1,"c":"#aaaaaa"},"6,6"],
+            [{"y":-0.35,"x":9},"7,0",    {"y":-0.25},"7,1",  {"y":-0.25},"7,2"]
+        ]
+    },
+    "customKeycodes": [
+        {"name": "OLED Ein",    "title": "OLED Display einschalten", "shortName": "O_ON"},
+        {"name": "OLED Aus",    "title": "OLED Display ausschalten", "shortName": "O_OFF"},
+        {"name": "OLED+",       "title": "OLED Helligkeit erhöhen", "shortName": "O_BUP"},
+        {"name": "OLED-",       "title": "OLED Helligkeit verringern", "shortName": "O_BDN"},
+
+        {"name": "Space L2",    "title": "Layer-Tap: Space oder Layer 2", "shortName": "SPC1"},
+        {"name": "Alt L3",      "title": "Layer-Tap: Alt oder Layer 3", "shortName": "ALT2"},
+        {"name": "Enter L4",    "title": "Layer-Tap: Enter oder Layer 4", "shortName": "ENT3"},
+
+        {"name": "A Shift",     "title": "Mod-Tap: A oder Shift", "shortName": "A_SHI"},
+        {"name": "S Alt",       "title": "Mod-Tap: S oder Alt", "shortName": "S_ALT"},
+        {"name": "D Ctrl",      "title": "Mod-Tap: D oder Ctrl", "shortName": "D_STRG"},
+        {"name": "F Win",       "title": "Mod-Tap: F oder Win", "shortName": "F_WIN"},
+        {"name": "J Win",       "title": "Mod-Tap: J oder Win", "shortName": "J_WIN"},
+        {"name": "K Ctrl",      "title": "Mod-Tap: K oder Ctrl", "shortName": "K_STRG"},
+        {"name": "L Alt",       "title": "Mod-Tap: L oder Alt", "shortName": "L_ALT"},
+        {"name": "OE Shift",    "title": "Mod-Tap: OE oder Shift", "shortName": "OE_SH"},
+        {"name": "1 Shift",     "title": "Mod-Tap: 1 oder Shift", "shortName": "1_SHI"},
+        {"name": "0 Shift",     "title": "Mod-Tap: 0 oder Shift", "shortName": "0_SHI"},
+
+        {"name": "H Win",       "title": "Mod-Tap: H oder Win", "shortName": "H_WIN"},
+        {"name": "I Alt",       "title": "Mod-Tap: I oder Alt", "shortName": "I_ALT"},
+        {"name": "E Strg",      "title": "Mod-Tap: E oder Strg", "shortName": "E_STRG"},
+
+        {"name": "T Shift",     "title": "Mod-Tap: T oder Shift", "shortName": "T_SHI"},
+        {"name": "R Strg",      "title": "Mod-Tap: R oder Strg", "shortName": "R_STRG"},
+        {"name": "N Alt",       "title": "Mod-Tap: N oder Alt", "shortName": "N_ALT"},
+        {"name": "S Win",       "title": "Mod-Tap: S oder Win", "shortName": "S_WIN"},
+
+        {"name": "ESC AltF4",   "title": "Tap-Dance: ESC oder Alt+F4", "shortName": "ESC AF4"},
+        {"name": "HASH AP",     "title": "Tap-Dance: HASH oder Apostroph", "shortName": "HASH_AP"}
+    ],
+    "menus": [
+        {
+          "label": "Lighting",
+          "content": [
+            {
+              "label": "Backlight",
+              "content": [
+                {
+                  "label": "Brightness",
+                  "type": "range",
+                  "options": [0, 255],
+                  "content": ["id_qmk_rgb_matrix_brightness", 3, 1]
+                },
+                {
+                  "label": "Effect",
+                  "type": "dropdown",
+                  "content": ["id_qmk_rgb_matrix_effect", 3, 2],
+                  "options": [
+                    ["None", 0],
+                    ["Solid Color", 1],
+                    ["Gradient Left Right", 2],
+                    ["Breathing", 3],
+                    ["Band Spiral Sat", 4],
+                    ["Band Spiral Val", 5],
+                    ["Cycle All", 6],
+                    ["Cycle Left Right", 7],
+                    ["Cycle Up Down", 8],
+                    ["Cycle Out In", 9],
+                    ["Cycle Out In Dual", 10],
+                    ["Rainbow Moving Chevron", 11],
+                    ["Cycle Pinwheel", 12],
+                    ["Cycle Spiral", 13],
+                    ["Dual Beacon", 14],
+                    ["Rainbow Beacon", 15],
+                    ["Rainbow Pinwheel", 16],
+                    ["Flower Blooming", 17],
+                    ["Jellybean Raindrops", 18],
+                    ["Hue Breating", 19],
+                    ["Hue Pendulum", 20],
+                    ["Hue Wave", 21],
+                    ["Typing Heatmap", 22],
+                    ["Solid Reactive Simple", 23],
+                    ["Solid Reactive Multiwide", 24],
+                    ["Solid Reactive Multicross", 25],
+                    ["Solid Reactive Multinexus", 26],
+                    ["Multisplash", 27],
+                    ["Solid Multisplash", 28],
+                    ["Starlight", 29],
+                    ["Starlight Dual Hue", 30],
+                    ["Starlight Dual Sat", 31]
+                  ]
+                },
+                {
+                  "showIf": "{id_qmk_rgb_matrix_effect} > 1",
+                  "label": "Effect Speed",
+                  "type": "range",
+                  "options": [0, 255],
+                  "content": ["id_qmk_rgb_matrix_effect_speed", 3, 3]
+                },
+                {
+                  "showIf": "{id_qmk_rgb_matrix_effect} != 0 && ( {id_qmk_rgb_matrix_effect} < 4 || {id_qmk_rgb_matrix_effect} == 18 || ({id_qmk_rgb_matrix_effect} > 17 && {id_qmk_rgb_matrix_effect} != 21) ) ",
+                  "label": "Color",
+                  "type": "color",
+                  "content": ["id_qmk_rgb_matrix_color", 3, 4]
+                }
+              ]
+            }
+          ]
+        }
+    ]
+}
