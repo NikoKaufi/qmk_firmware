@@ -131,7 +131,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     /*  [2]
      * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
-     * │GES│   │   │MS↑│   │PgU|            |PgD|   | ↑ |   |   |+*~|
+     * │GES│   │   │MS↑│   │PgU|            |PgD|   | ↑ |   |´` |+*~|
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
      * │CAP│SHI│MS←│MS↓│MS→│Po1|            |End| ← | ↓ | → |SHI|#' |
      * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         QK_LLCK, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
                                             KC_LCTL, QK_LLCK, KC_LALT,
         //right
-                 KC_PGDN, KC_NO,   KC_UP,   KC_NO,   KC_NO,   DE_PLUS,
+                 KC_PGDN, KC_NO,   KC_UP,   KC_NO,   DE_ACUT, DE_PLUS,
                  KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, DE_HASH,
         KC_BTN2, NK_TOGG, KC_NO,   KC_BTN2, KC_NO,   KC_NO,   KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
