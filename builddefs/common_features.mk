@@ -985,7 +985,7 @@ ifeq ($(strip $(WS2812_DRIVER_REQUIRED)), yes)
 
     COMMON_VPATH += $(DRIVER_PATH)/led
 
-    SRC += ws2812.c ws2812_$(strip $(WS2812_DRIVER)).c
+    SRC += ws2812_$(strip $(WS2812_DRIVER)).c
 
     ifeq ($(strip $(PLATFORM)), CHIBIOS)
         ifeq ($(strip $(WS2812_DRIVER)), pwm)
