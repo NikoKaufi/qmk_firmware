@@ -93,14 +93,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                 └───┴───┴───┘    └───┴───┴───┘
      */
     [_1_NAV] = LAYOUT_split_3x6_3(
-        QK_GESC, KC_NO,   KC_NO,   KC_MS_U, KC_NO,   KC_PGUP,
-        KC_CAPS, KC_LSFT, KC_MS_L, KC_MS_D, KC_MS_R, KC_HOME,
-        QK_LLCK, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BTN1, KC_BTN1,
+        QK_GESC, KC_NO,   KC_NO,   MS_UP,   KC_NO,   KC_PGUP,
+        KC_CAPS, KC_LSFT, MS_LEFT, MS_DOWN, MS_RGHT, KC_HOME,
+        QK_LLCK, KC_NO,   KC_NO,   KC_NO,   KC_NO,   MS_BTN1, MS_BTN1,
                                             KC_LCTL, QK_LLCK, KC_LALT,
         //right
                  KC_PGDN, KC_NO,   KC_UP,   KC_NO,   DE_ACUT, DE_PLUS,
                  KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, DE_HASH,
-        KC_BTN2, NK_TOGG, KC_NO,   KC_BTN2, KC_NO,   KC_NO,   KC_NO,
+        MS_BTN2, NK_TOGG, KC_NO,   MS_BTN3, KC_NO,   KC_NO,   KC_NO,
         KC_RALT, KC_BSPC, KC_RGUI
         ),
     /*  [2]
@@ -154,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_0_ALPHA] = {ENCODER_CCW_CW(KC_VOLD,  KC_VOLU),   ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
-    [_1_NAV] =   {ENCODER_CCW_CW(KC_WH_L,  KC_WH_R),   ENCODER_CCW_CW(KC_WH_U, KC_WH_D)},
+    [_1_NAV] =   {ENCODER_CCW_CW(MS_WHLL,  MS_WHLR),   ENCODER_CCW_CW(MS_WHLU, MS_WHLD)},
     [_2_NUM] =   {ENCODER_CCW_CW(KC_NO,    KC_NO),     ENCODER_CCW_CW(KC_NO,   KC_NO)},
     [_3_RGB] =   {ENCODER_CCW_CW(RM_PREV,  RM_NEXT),   ENCODER_CCW_CW(KC_NO,   KC_NO)}
     };
