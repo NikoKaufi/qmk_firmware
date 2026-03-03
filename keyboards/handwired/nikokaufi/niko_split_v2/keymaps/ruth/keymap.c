@@ -3,6 +3,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
+#include "sendstring_german.h"
 
 /* TAP-DANCE*/
 #ifdef TAP_DANCE_ENABLE
@@ -166,17 +167,20 @@ enum combo_events {
   DESK_RI,
   DESK_LE,
   CAPWD,
+  LEADER,
 };
 #ifdef COMBO_ENABLE
     const uint16_t PROGMEM spc_bspc_del[]  = {SPC1,  KC_BSPC, COMBO_END};
     const uint16_t PROGMEM desktop_right[] = {KC_T,  DE_Z,    COMBO_END};
     const uint16_t PROGMEM desktop_left[]  = {KC_G,  KC_H,    COMBO_END};
     const uint16_t PROGMEM caps_word[]     = {A_SHI, OE_SHI,  COMBO_END};
+    const uint16_t PROGMEM leader_key[]    = {F_WIN, J_WIN,   COMBO_END};
     combo_t key_combos[] = {
         [DEL] = COMBO(spc_bspc_del, KC_DEL),
         [DESK_RI] = COMBO_ACTION(desktop_right),
         [DESK_LE] = COMBO_ACTION(desktop_left),
-        [CAPWD]   = COMBO(caps_word, CW_TOGG)
+        [CAPWD]   = COMBO(caps_word, CW_TOGG),
+        [LEADER]  = COMBO(leader_key, QK_LEAD)
     };
     void process_combo_event(uint16_t combo_index, bool pressed) {
         switch(combo_index) {
@@ -201,6 +205,31 @@ enum combo_events {
         }
     }
 #endif //Combo
+
+/* LEADER (KEY) */
+#ifdef LEADER_ENABLE
+    void leader_end_user(void) {
+        if (leader_sequence_one_key(KC_C)) {
+            SEND_STRING(":meow_coffee: ");
+        } else if (leader_sequence_two_keys(KC_C, KC_S)){
+            SEND_STRING(":meow_coffeespitting: ");
+        } else if (leader_sequence_one_key(KC_T)) {
+            SEND_STRING(":meow_tea: ");
+        } else if (leader_sequence_one_key(KC_H)) {
+            SEND_STRING(":meow_hug: ");
+        } else if (leader_sequence_two_keys(KC_H, KC_P)){
+            SEND_STRING(":meow_happy_paws:  ");
+        } else if (leader_sequence_one_key(KC_N)) {
+            SEND_STRING(":meow_noddies:");
+        } else if (leader_sequence_one_key(KC_B)) {
+            SEND_STRING(":meow_bongotap: ");
+        } else if (leader_sequence_one_key(KC_A)) {
+            SEND_STRING(":meow_attention: ");
+        } else if (leader_sequence_one_key(KC_P)) {
+            SEND_STRING(":meow_pleading: ");
+        }
+    }
+#endif //LEADER
 
 /* TAP-DANCE */
 #ifdef TAP_DANCE_ENABLE
