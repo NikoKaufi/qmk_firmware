@@ -57,6 +57,7 @@ enum layer_names {
     _1_NAV,
     _2_NUM,
     _3_RGB,
+    _4_NUP,
 };
 /* KEYMAP */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -110,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
      * │TAB│ 1 │ 2 │ 3 │ 4 │ 5 |            | 6 | 7 | 8 | 9 | 0 |#' |
      * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
-     * │   │   │   │   │   |   |   |    |   |   |   |,; |.: |-_ |   |
+     * │   │   │   │   │   |TG4|   |    |   |   |   |,; |.: |-_ |   |
      * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
      *                 |   |CTL|/2\|    |AGR|<- |Win|
      *                 └───┴───┴───┘    └───┴───┴───┘
@@ -118,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_2_NUM] = LAYOUT_split_3x6_3(
         KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,
         KC_TAB,  ONE_SHI, KC_2,    KC_3,    KC_4,    KC_5,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   TG(4),   KC_NO,
                                             KC_NO,   KC_LCTL, _______,
         //right
                  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
@@ -147,6 +148,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_NO,   KC_NO,   O_OFF,   O_BDN,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
         KC_NO,   KC_NO,   _______
+        ),
+    /*  [4]
+     * ┌───┬───┬───┬───┬───┬───┐            ┌───┬───┬───┬───┬───┬───┐
+     * │TG4│   │   │   │   │   |            |NP7|NP8|NP9|NP/|NP*|NP-|
+     * ├───┼───┼───┼───┼───┼───┤            ├───┼───┼───┼───┼───┼───┤
+     * │   │SHI│   │   │NLK│   |            |NP4|NP5|NP6|   |SHI|NP+|
+     * ├───┼───┼───┼───┼───┼───┼───┐    ┌───┼───┼───┼───┼───┼───┼───┤
+     * │   │   │   │   │   |   |   |    |   |NP1|NP2|NP3|   |   |NP.|
+     * └───┴───┴───┴───┼───┼───┼───┤    ├───┼───┼───┼───┴───┴───┴───┘
+     *                 |   |   |   |    |NP0|BSP|NPE|
+     *                 └───┴───┴───┘    └───┴───┴───┘
+     */
+    [_4_NUP] = LAYOUT_split_3x6_3(
+        TG(4),   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   KC_LSFT, KC_NO,   KC_NO,   KC_NUM,  KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   RM_TOGG,
+                                            KC_NO,   KC_NO,   KC_NO,
+        //right
+                 KC_P7,   KC_P8,   KC_P9,   KC_PSLS, KC_PAST, KC_PMNS,
+                 KC_P4,   KC_P5,   KC_P6,   KC_NO,   KC_RSFT, KC_PPLS,
+        KC_NO,   KC_P1,   KC_P2,   KC_P3,   KC_NO,   KC_NO,   KC_PDOT,
+        KC_P0,   KC_BSPC, KC_PENT
         )
 
 };
@@ -157,7 +180,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_0_ALPHA] = {ENCODER_CCW_CW(KC_VOLD,  KC_VOLU),   ENCODER_CCW_CW(KC_MPRV, KC_MNXT)},
     [_1_NAV] =   {ENCODER_CCW_CW(MS_WHLL,  MS_WHLR),   ENCODER_CCW_CW(MS_WHLU, MS_WHLD)},
     [_2_NUM] =   {ENCODER_CCW_CW(KC_NO,    KC_NO),     ENCODER_CCW_CW(KC_NO,   KC_NO)},
-    [_3_RGB] =   {ENCODER_CCW_CW(RM_PREV,  RM_NEXT),   ENCODER_CCW_CW(KC_NO,   KC_NO)}
+    [_3_RGB] =   {ENCODER_CCW_CW(RM_PREV,  RM_NEXT),   ENCODER_CCW_CW(KC_NO,   KC_NO)},
+    [_4_NUP] =   {ENCODER_CCW_CW(KC_NO,    KC_NO),     ENCODER_CCW_CW(KC_LEFT, KC_RIGHT)}
     };
 #endif //ENCODER_MAP
 

@@ -152,6 +152,9 @@ static void print_left(void) {
         case _3_RGB:
             oled_write("R-G-B", false);
             break;
+        case _4_NUP:
+            oled_write("NuPad", false);
+            break;
         default:
             oled_write("Undef", false);
             break;
