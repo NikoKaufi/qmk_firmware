@@ -451,9 +451,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 
 
-
-
-
 /* IDK, nur kopiert */
 
     // bool process_record_user(uint16_t keycode, keyrecord_t *record) {
